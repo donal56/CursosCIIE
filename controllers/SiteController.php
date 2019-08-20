@@ -18,12 +18,26 @@ class SiteController extends Controller
      */
     public function behaviors()
     {    
-         return [
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],     
+            ],
+            'access' => 
+            [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','create','update','view'],
+            ],  
+        ];
+        /* 
+        return [
             'ghost-access' => [
                 'class' => 'webvimark\modules\UserManagement\components\GhostAccessControl',
             ],
         ];
-        /*return [
+        return [
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
