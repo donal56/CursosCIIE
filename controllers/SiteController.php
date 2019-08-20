@@ -9,7 +9,6 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\SwsDashboard;
 use webvimark\modules\UserManagement\models\User;
 
 class SiteController extends Controller
@@ -76,23 +75,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $gpo = null;
-        $prv = null;
-        if(isset(Yii::$app->SESSION['gpo'])) {
-            $gpo = Yii::$app->SESSION['gpo'];
-            unset(Yii::$app->SESSION['gpo']);
-            if(isset(Yii::$app->SESSION['prv'])) {
-                $prv = Yii::$app->SESSION['prv'];
-                unset(Yii::$app->SESSION['prv']);
-            }
-        }
-        $botones = SwsDashboard::botones($gpo,$prv);
-        if(!Yii::$app->user->isGuest) {
-            return $this->render('index',[
-	            'botones' => $botones,
-	        ]);
-        }
-        return $this->redirect('site/login');
+        
+        return $this->redirect('site/about');
     }
 
     public function actionDash()

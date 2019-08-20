@@ -7,5 +7,4 @@ $this->title = 'Sistema del ITVH';
 <br/>
 <?php 
   
-echo KrnPanel::widget([ 'buttons'=>$botones]);
 
