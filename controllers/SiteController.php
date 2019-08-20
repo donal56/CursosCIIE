@@ -19,11 +19,24 @@ class SiteController extends Controller
     public function behaviors()
     {    
          return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],     
+            ],
+            'access' => 
+            [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','create','update','view'],
+            ],  
+        ];
+         /*return [
             'ghost-access' => [
                 'class' => 'webvimark\modules\UserManagement\components\GhostAccessControl',
             ],
         ];
-        /*return [
+        return [
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
@@ -60,14 +73,14 @@ class SiteController extends Controller
         ];
     }
 
-    public function beforeAction($action)
+  /*  public function beforeAction($action)
     {
         if ($action->id == 'index') {
             $this->enableCsrfValidation = false;
         }
         return parent::beforeAction($action);
     }
-
+*/
     /**
      * Displays homepage.
      *
