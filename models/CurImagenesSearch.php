@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\SwsDashboardgrupos;
+use app\models\CurImagenes;
 
 /**
- * SwsDashboardgruposSearch represents the model behind the search form about `app\models\SwsDashboardgrupos`.
+ * CurImagenesSearch represents the model behind the search form about `app\models\CurImagenes`.
  */
-class SwsDashboardgruposSearch extends SwsDashboardgrupos
+class CurImagenesSearch extends CurImagenes
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class SwsDashboardgruposSearch extends SwsDashboardgrupos
     public function rules()
     {
         return [
-            [['gpo_id', 'gpo_orden', 'gpo_activo'], 'integer'],
-            [['gpo_nombre', 'gpo_color'], 'safe'],
+            [['ima_id', 'ima_activo', 'ima_fkcurso'], 'integer'],
+            [['ima_url'], 'safe'],
         ];
     }
 
@@ -41,15 +41,13 @@ class SwsDashboardgruposSearch extends SwsDashboardgrupos
      */
     public function search($params)
     {
-        $query = SwsDashboardgrupos::find();
+        $query = CurImagenes::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $dataProvider->sort->defaultOrder = ['gpo_orden' => SORT_ASC];
 
         $this->load($params);
 
@@ -61,13 +59,12 @@ class SwsDashboardgruposSearch extends SwsDashboardgrupos
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'gpo_id' => $this->gpo_id,
-            'gpo_orden' => $this->gpo_orden,
-            'gpo_activo' => $this->gpo_activo,
+            'ima_id' => $this->ima_id,
+            'ima_activo' => $this->ima_activo,
+            'ima_fkcurso' => $this->ima_fkcurso,
         ]);
 
-        $query->andFilterWhere(['like', 'gpo_nombre', $this->gpo_nombre])
-            ->andFilterWhere(['like', 'gpo_color', $this->gpo_color]);
+        $query->andFilterWhere(['like', 'ima_url', $this->ima_url]);
 
         return $dataProvider;
     }
