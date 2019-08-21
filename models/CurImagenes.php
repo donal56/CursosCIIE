@@ -43,10 +43,10 @@ class CurImagenes extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ima_id' => 'Ima ID',
-            'ima_url' => 'Ima Url',
-            'ima_activo' => 'Ima Activo',
-            'ima_fkcurso' => 'Ima Fkcurso',
+            'ima_id' => 'ID',
+            'ima_url' => 'Url',
+            'ima_activo' => 'Activo',
+            'ima_fkcurso' => 'Curso',
         ];
     }
 

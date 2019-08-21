@@ -13,7 +13,7 @@
 
     <br>
     <div class= 'container'>
-        <h1 class= 'display-1' style= 'display: inline' ><?= $model->cur_nombre ?></h1>
+        <h1 |class= 'display-1' style= 'display: inline' ><?= $model->cur_nombre ?></h1>
 
         <?= Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil']) ?>
         <?= Html::a('', ['delete', 'id' => $model->cur_id], [
