@@ -45,12 +45,12 @@ class CurInstructor extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ins_id' => 'Ins ID',
-            'ins_titulo' => 'Ins Titulo',
-            'ins_nombre' => 'Ins Nombre',
-            'ins_paterno' => 'Ins Paterno',
-            'ins_materno' => 'Ins Materno',
-            'ins_descripcion' => 'Ins Descripcion',
+            'ins_id' => 'ID',
+            'ins_titulo' => 'Titulo',
+            'ins_nombre' => 'Nombre',
+            'ins_paterno' => 'Apellido Paterno',
+            'ins_materno' => 'Apellido Materno',
+            'ins_descripcion' => 'Descripcion',
         ];
     }
 

@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\CurParticipanteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Cur Participantes';
+$this->title = 'Participantes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cur-participante-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Cur Participante', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Registrar Participante', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
