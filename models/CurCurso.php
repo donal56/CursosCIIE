@@ -110,4 +110,19 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CurParticipante::className(), ['par_fkcurso' => 'cur_id']);
     }
+
+    public function getInscritos()
+    {
+        if (($model = CurParticipante::findAll(['par_fkcurso' => $this->cur_id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function getCupoRestante(){
+        return ( $this->cur_cupo - count($this->getInscritos()) );
+    }
+
+
 }

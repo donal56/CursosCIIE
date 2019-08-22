@@ -78,4 +78,9 @@ class CurParticipante extends \yii\db\ActiveRecord
     {
         return $this->hasOne(CurCurso::className(), ['cur_id' => 'par_fkcurso']);
     }
+
+    public function getImage()
+    {
+        return ($this->par_genero == "M") ? "/img/CIIE/women.jpg" :"/img/CIIE/man.jpg" ;
+    }
 }
