@@ -56,18 +56,18 @@ class CurParticipante extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'par_id' => 'Par ID',
-            'par_nombre' => 'Par Nombre',
-            'par_paterno' => 'Par Paterno',
-            'par_materno' => 'Par Materno',
-            'par_genero' => 'Par Genero',
-            'par_telefono' => 'Par Telefono',
-            'par_email' => 'Par Email',
-            'par_edad' => 'Par Edad',
-            'par_procedencia' => 'Par Procedencia',
-            'par_pagado' => 'Par Pagado',
-            'par_observaciones' => 'Par Observaciones',
-            'par_fkcurso' => 'Par Fkcurso',
+            'par_id' => 'ID',
+            'par_nombre' => 'Nombre',
+            'par_paterno' => 'Paterno',
+            'par_materno' => 'Materno',
+            'par_genero' => 'Genero',
+            'par_telefono' => 'Telefono',
+            'par_email' => 'Email',
+            'par_edad' => 'Edad',
+            'par_procedencia' => 'Procedencia',
+            'par_pagado' => 'Pagado',
+            'par_observaciones' => 'Observaciones',
+            'par_fkcurso' => 'Curso',
         ];
     }
 
