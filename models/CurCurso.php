@@ -191,7 +191,7 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return nl2br($this->cur_contacto);
     }
-}
+    
     public function getInscritos()
     {
         if (($model = CurParticipante::findAll(['par_fkcurso' => $this->cur_id])) !== null) {
