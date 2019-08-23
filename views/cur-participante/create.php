@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\CurParticipante */
 
-$this->title = 'Crear Participante';
+$this->title = 'Registrar Participante';
 $this->params['breadcrumbs'][] = ['label' => 'Participantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
