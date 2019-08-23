@@ -123,6 +123,10 @@ class CurCurso extends \yii\db\ActiveRecord
     public function getCupoRestante(){
         return ( $this->cur_cupo - count($this->getInscritos()) );
     }
+    public function getCountInsctritos(){
+        return count($this->getInscritos());
+    }
+
 
 
 }
