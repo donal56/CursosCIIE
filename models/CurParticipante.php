@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "cur_participante".
@@ -41,8 +42,11 @@ class CurParticipante extends \yii\db\ActiveRecord
             [['par_nombre', 'par_paterno', 'par_materno', 'par_genero', 'par_edad', 'par_fkcurso'], 'required'],
             [['par_edad', 'par_fkcurso'], 'integer'],
             [['par_pagado'], 'number'],
+            ['par_pagado','compare', 'compareValue' => $this->getCurso()->cur_costo, 'operator' => '<=','message'=>Yii::t('app','Se ha excedido el pago máximo.')],
             [['par_observaciones'], 'string'],
-            [['par_nombre', 'par_paterno', 'par_materno', 'par_email'], 'string', 'max' => 50],
+            [['par_nombre', 'par_paterno', 'par_materno'], 'string', 'max' => 50],
+            [['par_email'], 'string', 'max' => 100],
+            [['par_email'], 'email'],
             [['par_genero'], 'string', 'max' => 1],
             [['par_telefono'], 'string', 'max' => 20],
             [['par_procedencia'], 'string', 'max' => 100],
@@ -82,5 +86,14 @@ class CurParticipante extends \yii\db\ActiveRecord
     public function getImage()
     {
         return ($this->par_genero == "M") ? "/img/CIIE/women.jpg" :"/img/CIIE/man.jpg" ;
+    }
+
+    public function getCurso()
+    {
+        if (($model = CurCurso::find()->one()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

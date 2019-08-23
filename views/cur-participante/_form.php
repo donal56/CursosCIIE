@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 </div>
     
 <div class="row"> 
-    <?= $form->field($model, 'par_genero',['options' => ['class' => 'form-group col-sm-2']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'par_genero',['options' => ['class' => 'form-group col-sm-2']])->dropDownList(['H' => 'Hombre', 'M' => 'Mujer'], ['prompt' => 'Seleccione Uno' ]); ?>
 
     <?= $form->field($model, 'par_edad',['options' => ['class' => 'form-group col-sm-2']])->textInput() ?>
     
@@ -38,16 +38,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'par_observaciones',['options' => ['class' => 'form-group col-sm-12']])->textarea(['rows' => 2]) ?>  
 </div>
 
-
-
-
-
-
-
-    <?php /* $form->field($model, 'par_fkcurso')->textInput() */?>
+    <?= $form->field($model, 'par_fkcurso')->hiddenInput(['value'=>'2'])->label(false); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
