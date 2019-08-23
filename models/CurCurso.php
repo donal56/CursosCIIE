@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * This is the model class for table "cur_curso".
@@ -189,5 +190,21 @@ class CurCurso extends \yii\db\ActiveRecord
     public function getContacto()
     {
         return nl2br($this->cur_contacto);
+    }
+}
+    public function getInscritos()
+    {
+        if (($model = CurParticipante::findAll(['par_fkcurso' => $this->cur_id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function getCupoRestante(){
+        return ( $this->cur_cupo - count($this->getInscritos()) );
+    }
+    public function getCountInsctritos(){
+        return count($this->getInscritos());
     }
 }
