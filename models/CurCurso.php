@@ -110,4 +110,84 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return $this->hasMany(CurParticipante::className(), ['par_fkcurso' => 'cur_id']);
     }
+
+    public function getDirigido()
+    {
+        return json_decode($this->cur_dirigido, true);
+    }
+
+    public function getPresentacion()
+    {
+        return nl2br($this->cur_presentacion);
+    }
+
+    public function getObjetivo()
+    {
+        return nl2br($this->cur_objetivo);
+    }
+
+    public function getRequisitos()
+    {
+        return json_decode($this->cur_requisitos, true);
+    }
+
+    public function getRequerimientos()
+    {
+        return json_decode($this->cur_requerimientos, true);
+    }
+
+    public function getHorario()
+    {
+        return nl2br($this->cur_horario);
+    }
+
+    public function getCosto()
+    {
+        return  '$' . number_format($this->cur_costo, 2);
+    }
+
+    public function getFormaPago()
+    {
+        return json_decode($this->cur_formaPago, true);
+    }
+
+    public function getObtendra()
+    {
+        return json_decode($this->cur_obtendra, true);
+    }
+
+    public function getInstructor()
+    {
+        $model = CurInstructor::findOne((int)$this->cur_fkins_id);
+        return mb_strtoupper($model->ins_titulo . " " .  $model->ins_nombre . " " .  $model->ins_paterno . " " .  $model->ins_materno);
+    }
+
+    public function getDescripcionInstructor()
+    {
+        $model = CurInstructor::findOne((int)$this->cur_fkins_id);
+        return nl2br($model->ins_descripcion);
+    }
+
+    public function getModulos()
+    {
+        $modulos= array();
+        $arr= json_decode($this->cur_temario, true);
+
+        foreach($arr as $key=>$value)
+        {
+            $modulos[]= $key;
+        }
+
+        return $modulos;
+    }
+
+    public function getTemario()
+    {
+        return json_decode($this->cur_temario, true);
+    }
+
+    public function getContacto()
+    {
+        return nl2br($this->cur_contacto);
+    }
 }
