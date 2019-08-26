@@ -90,7 +90,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         
-        return $this->redirect('site/about');
+        return $this->redirect('/cur-curso/view');
     }
 
     public function actionDash()
