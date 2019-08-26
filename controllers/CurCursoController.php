@@ -115,8 +115,9 @@ class CurCursoController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionInscritos($id)
+    public function actionInscritos()
     {
+        $id = CurCurso::getCurso()->cur_id;
         return $this->render('inscritos', [
                'model' =>  $this->findModel($id),
         ]);
