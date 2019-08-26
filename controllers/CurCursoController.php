@@ -8,6 +8,7 @@ use app\models\CurCursoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use uii\filters\AccessControl;
 
 /**
  * CurCursoController implements the CRUD actions for CurCurso model.
@@ -20,10 +21,18 @@ class CurCursoController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => 
+            [
+                'class' => \yii\filters\AccessControl::className(),
+                'only' => ['index','create','update'],
+                'rules' => 
+                [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                    // everything else is denied
                 ],
             ],
         ];
