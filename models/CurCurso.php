@@ -118,6 +118,12 @@ class CurCurso extends \yii\db\ActiveRecord
         return $this->hasMany(CurImagenes::className(), ['ima_fkcurso' => 'cur_id']);
     }
 
+    public function getImagen()
+    {
+        $modelo = CurImagenes::findOne($this->cur_id);
+        return $modelo->ima_url;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

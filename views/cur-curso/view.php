@@ -2,6 +2,7 @@
 
     use yii\helpers\Html;
     use yii\helpers\JSON;
+    use yii\bootstrap\Carousel;
     use yii\base;
 
     /* @var $this yii\web\View */
@@ -54,6 +55,26 @@
             </div>
             <?php } catch(Exception $e){} ?>
 
+                <!--<?php echo '<pre>'; 
+                    print_r($model->getImagen()); 
+                    echo "</pre>";
+                    echo '<pre>'; 
+                    print_r($model->curImagenes); 
+                    echo "</pre>" ?>--!>
+            
+            <div class= 'myContainer' align= 'center'>
+                <img src= "/img/CIIE/cursojavaee.png" style= 'width: 100%'>
+            </div>
+
+            <?php echo Carousel::widget([
+                'items' => [
+                    [
+                        'content' => '<img src="'. $model->getImagen() . '"/>',
+                        'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
+                        'options' => [],
+                    ],
+                ]
+            ]); ?>
 
             <?php try{ ?>
             <div class= 'myContainer'>
@@ -196,7 +217,7 @@ $this->registerCss(
     "@font-face 
     {
         font-family: 'SoberanaSans-Regular';
-        src: url('../web/fonts/SoberanaSans-Regular.otf') format('opentype');
+        src: url('/web/fonts/SoberanaSans-Regular.otf') format('opentype');
         font-weight: normal;
         font-weight: normal;
     }
