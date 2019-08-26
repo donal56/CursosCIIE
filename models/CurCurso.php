@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\web\NotFoundHttpException;
+use \yii\helpers\Json;
 
 /**
  * This is the model class for table "cur_curso".
@@ -86,6 +87,19 @@ class CurCurso extends \yii\db\ActiveRecord
             'cur_contacto' => 'Contacto',
             'cur_observaciones' => 'Observaciones',
         ];
+    }
+
+    public function afterFind() {
+        parent::afterFind();
+        $this->cur_dirigido = Json::decode($this->cur_dirigido);
+        $this->cur_requisitos = Json::decode($this->cur_requisitos);
+        $this->cur_requerimientos = Json::decode($this->cur_requerimientos);
+    }
+
+    public function beforeGuardar() {
+        $this->cur_dirigido = Json::encode($this->cur_dirigido);
+        $this->cur_requisitos = Json::encode($this->cur_requisitos);
+        $this->cur_requerimientos = Json::encode($this->cur_requerimientos);
     }
 
     /**
