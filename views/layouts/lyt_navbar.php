@@ -18,7 +18,7 @@ NavBar::begin([
 ]);
 
 $menuItems = [
-    ['label' => '<span class="glyphicon glyphicon-home"></span>', 'url' => ['/site/index']],
+    ['label' => '<span class="glyphicon glyphicon-home"></span>', 'url' => ['/cur-curso/view']],
     ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']],
 ];
 if (Yii::$app->user->isGuest) {
@@ -28,6 +28,7 @@ if (Yii::$app->user->isGuest) {
   //Agregar opciones de administrador
   //if(Yii::$app->user->identity->hasRole('Admin')):
     $menuItems[] = ['label' => 'Administrador', 'items'=>UserManagementModule::menuItems()];
+    $menuItems[] = ['label' => 'Gestionar Participantes', 'url' => ['/cur-participante/index']];
   //endif;
   $menuItems[] = [
   'label' => 'Cerrar Sesión (' . Yii::$app->user->identity->username . ')',
