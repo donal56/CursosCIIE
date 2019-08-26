@@ -226,4 +226,13 @@ class CurCurso extends \yii\db\ActiveRecord
     public function getCountInsctritos(){
         return count($this->getInscritos());
     }
+
+    public static function getCurso()
+    {
+        if (($model = CurCurso::find()->one()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }
