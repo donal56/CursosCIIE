@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use unclead\multipleinput\MultipleInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CurCurso */
@@ -14,7 +15,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cur_nombre')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'cur_dirigido')->textInput() ?>
+    <?php
+        echo $form->field($model, 'cur_dirigido')->widget(MultipleInput::className(), [
+            'enableError' => true,
+            'addButtonPosition' => MultipleInput::POS_HEADER, // show add button in the header
+        ]);
+    ?>
 
     <?= $form->field($model, 'cur_cupo')->textInput() ?>
 
@@ -26,9 +32,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cur_objetivo')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'cur_requisitos')->textInput() ?>
+    <?php
+        echo $form->field($model, 'cur_requisitos')->widget(MultipleInput::className(), [
+            'enableError' => true,
+            'addButtonPosition' => MultipleInput::POS_HEADER, // show add button in the header
+        ]);
+    ?>
 
-    <?= $form->field($model, 'cur_requerimientos')->textInput() ?>
+
+    <?php
+        echo $form->field($model, 'cur_requerimientos')->widget(MultipleInput::className(), [
+            'enableError' => true,
+            'addButtonPosition' => MultipleInput::POS_HEADER, // show add button in the header
+        ]);
+    ?>
 
     <?= $form->field($model, 'cur_duracion')->textInput() ?>
 

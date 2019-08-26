@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\web\NotFoundHttpException;
+use \yii\helpers\Json;
 
 /**
  * This is the model class for table "cur_curso".
@@ -87,6 +89,19 @@ class CurCurso extends \yii\db\ActiveRecord
         ];
     }
 
+   /* public function afterFind() {
+        parent::afterFind();
+        $this->cur_dirigido = Json::decode($this->cur_dirigido);
+        $this->cur_requisitos = Json::decode($this->cur_requisitos);
+        $this->cur_requerimientos = Json::decode($this->cur_requerimientos);
+    }*/
+
+    public function beforeGuardar() {
+        $this->cur_dirigido = Json::encode($this->cur_dirigido);
+        $this->cur_requisitos = Json::encode($this->cur_requisitos);
+        $this->cur_requerimientos = Json::encode($this->cur_requerimientos);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -109,5 +124,106 @@ class CurCurso extends \yii\db\ActiveRecord
     public function getCurParticipantes()
     {
         return $this->hasMany(CurParticipante::className(), ['par_fkcurso' => 'cur_id']);
+    }
+
+    public function getDirigido()
+    {
+        return json_decode($this->cur_dirigido, true);
+    }
+
+    public function getPresentacion()
+    {
+        return nl2br($this->cur_presentacion);
+    }
+
+    public function getObjetivo()
+    {
+        return nl2br($this->cur_objetivo);
+    }
+
+    public function getRequisitos()
+    {
+        return json_decode($this->cur_requisitos, true);
+    }
+
+    public function getRequerimientos()
+    {
+        return json_decode($this->cur_requerimientos, true);
+    }
+
+    public function getHorario()
+    {
+        return nl2br($this->cur_horario);
+    }
+
+    public function getCosto()
+    {
+        return  '$' . number_format($this->cur_costo, 2);
+    }
+
+    public function getFormaPago()
+    {
+        return json_decode($this->cur_formaPago, true);
+    }
+
+    public function getObtendra()
+    {
+        return json_decode($this->cur_obtendra, true);
+    }
+
+    public function getInstructor()
+    {
+        $model = CurInstructor::findOne((int)$this->cur_fkins_id);
+        return mb_strtoupper($model->ins_titulo . " " .  $model->ins_nombre . " " .  $model->ins_paterno . " " .  $model->ins_materno);
+    }
+
+    public function getDescripcionInstructor()
+    {
+        $model = CurInstructor::findOne((int)$this->cur_fkins_id);
+        return nl2br($model->ins_descripcion);
+    }
+
+    // public function getModulos()
+    // {
+    //     $modulos= array();
+    //     $arr= json_decode($this->cur_temario, true);
+
+    //     foreach($arr as $key=>$value)
+    //     {
+    //         $modulos[]= $key;
+    //     }
+
+    //     return $modulos;
+    // }
+
+    public function getProcedimiento()
+    {
+        return json_decode($this->cur_procedimiento, true);
+    }
+
+    public function getTemario()
+    {
+        return $this->cur_temario;
+    }
+
+    public function getContacto()
+    {
+        return nl2br($this->cur_contacto);
+    }
+    
+    public function getInscritos()
+    {
+        if (($model = CurParticipante::findAll(['par_fkcurso' => $this->cur_id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    public function getCupoRestante(){
+        return ( $this->cur_cupo - count($this->getInscritos()) );
+    }
+    public function getCountInsctritos(){
+        return count($this->getInscritos());
     }
 }
