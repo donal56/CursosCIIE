@@ -19,6 +19,7 @@ NavBar::begin([
 
 $menuItems = [
     ['label' => '<span class="glyphicon glyphicon-home"></span>', 'url' => ['/site/index']],
+    ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']],
 ];
 if (Yii::$app->user->isGuest) {
   $menuItems[] = ['label' => 'Iniciar Sesión', 'url' => ['/user-management/auth/login']];
