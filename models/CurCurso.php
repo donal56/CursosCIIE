@@ -89,12 +89,12 @@ class CurCurso extends \yii\db\ActiveRecord
         ];
     }
 
-    public function afterFind() {
+   /* public function afterFind() {
         parent::afterFind();
         $this->cur_dirigido = Json::decode($this->cur_dirigido);
         $this->cur_requisitos = Json::decode($this->cur_requisitos);
         $this->cur_requerimientos = Json::decode($this->cur_requerimientos);
-    }
+    }*/
 
     public function beforeGuardar() {
         $this->cur_dirigido = Json::encode($this->cur_dirigido);
