@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\CurCurso;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CurParticipante */
@@ -38,7 +39,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'par_observaciones',['options' => ['class' => 'form-group col-sm-12']])->textarea(['rows' => 2]) ?>  
 </div>
 
-    <?= $form->field($model, 'par_fkcurso')->hiddenInput(['value'=>'2'])->label(false); ?>
+    <?= $form->field($model, 'par_fkcurso')->hiddenInput(['value'=>CurCurso::getCurso()->cur_id])->label(false); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
