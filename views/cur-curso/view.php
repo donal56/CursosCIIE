@@ -159,27 +159,11 @@
 
             <?php try{ ?>
             <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Módulos') ?>
-                <ul class= 'lista'>    
-                <?php 
-                    foreach($model->getModulos() as $elem)
-                    {
-                        echo "<li class= 'lista'>" . $elem . "</li>";
-                    }
-                ?>
-                </ul>
-            </div>
-            <?php } catch(Exception $e){} ?>
-
-
-            <?php try{ ?>
-            <div class= 'myContainer'>
                 <?= Html::tag('h4', 'Procedimiento de inscripción') ?>
                 <ul class= 'lista'>    
                 <?php 
-                    $arr = json_decode($model->cur_procedimiento, true); 
 
-                    foreach( $arr as $elem)
+                    foreach( $model->getProcedimiento() as $elem)
                     {
                         echo "<li class= 'lista'>" . $elem . "</li>";
                     }
@@ -191,50 +175,7 @@
             <?php try{ ?>
             <div class= 'myContainer'>
                 <?= Html::tag('h4', 'Temario') ?>
-                <ul class= 'lista'>    
-                <?php 
-                    $temario = $model->getTemario(); 
-
-                    $modulos = $model->getModulos();
-
-                    for($i= 0; $i < sizeOf($modulos); $i++)
-                    {
-                        echo "<ul class= 'lista'><li class= 'lista'>" . $modulos[$i];
-                       
-                        if(is_array($temario[$modulos[$i]]))
-                        {
-                            $sublista= $temario[$modulos[$i]];
-
-                            for($j= 0; $j <= sizeOf($sublista); $j++)
-                            {
-                                echo "<ul class= 'lista'>";
-                                if(is_array($sublista[$j]))
-                                {
-                                    $subsublista= $temario[$modulos[$i]];
-        
-                                    for($j= 0; $j < sizeOf($subsublista); $j++)
-                                    {
-                                        echo "<li class= 'lista'>" . $subsublista[$j] . "</li>";
-                                    }
-
-                                }
-                                else 
-                                {
-                                    echo "<li class= 'lista'>" . $sublista[$j] . "</li>";
-                                } 
-                                echo "</ul>";    
-                            }
-                            echo "</li>";
-                        }
-                        else
-                        {
-                            echo "</li>";
-                        }
-                        
-                        echo "</ul>";
-                    }
-                ?>
-                </ul>
+                <?php echo $model->getTemario(); ?>
             </div>
             <?php } catch(Exception $e){} ?>
 
@@ -252,7 +193,20 @@
 <?php
 
 $this->registerCss( 
-    "h1, h2, h3, h4, h5, h6 
+    "@font-face 
+    {
+        font-family: 'SoberanaSans-Regular';
+        src: url('../web/fonts/SoberanaSans-Regular.otf') format('opentype');
+        font-weight: normal;
+        font-weight: normal;
+    }
+
+    html
+    {
+        font-family: SoberanaSans-Regular;
+    }
+
+    h1, h2, h3, h4, h5, h6 
     {
         margin: 10px 0;
         font-family: inherit;
@@ -263,20 +217,15 @@ $this->registerCss(
         line-height: 40px;
     }
 
-    li.lista::before 
+    li.lista::before, .myContainer li::before
     {
         font-weight: bold;
         content: '» ';
     }    
     
-    ul.lista, li.lista
+    ul.lista, li.lista, .myContainer li, .myContainer ul
     {
         padding: 7px 0 7px 7px;
-    }
-    
-    html
-    {
-        font: 13px 'SoberanaSans-Regular';
     }
     
     .myContainer

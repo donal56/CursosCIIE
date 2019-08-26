@@ -183,22 +183,27 @@ class CurCurso extends \yii\db\ActiveRecord
         return nl2br($model->ins_descripcion);
     }
 
-    public function getModulos()
+    // public function getModulos()
+    // {
+    //     $modulos= array();
+    //     $arr= json_decode($this->cur_temario, true);
+
+    //     foreach($arr as $key=>$value)
+    //     {
+    //         $modulos[]= $key;
+    //     }
+
+    //     return $modulos;
+    // }
+
+    public function getProcedimiento()
     {
-        $modulos= array();
-        $arr= json_decode($this->cur_temario, true);
-
-        foreach($arr as $key=>$value)
-        {
-            $modulos[]= $key;
-        }
-
-        return $modulos;
+        return json_decode($this->cur_procedimiento, true);
     }
 
     public function getTemario()
     {
-        return json_decode($this->cur_temario, true);
+        return $this->cur_temario;
     }
 
     public function getContacto()
