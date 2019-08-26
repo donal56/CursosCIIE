@@ -47,7 +47,7 @@ use yii\widgets\ActiveForm;
                 </h3> 
                 <br>
              </div>
-            <?= Html::a('Regresar', '/cur-curso', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Regresar', '/', ['class' => 'btn btn-primary']) ?>
         </h2>
         <!-- /pager_nav -->
     
