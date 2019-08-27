@@ -27,19 +27,42 @@ $this->params['breadcrumbs'][] = $this->title;
             //'cur_id',
             'cur_nombre',
             //'cur_dirigido',
-            'cur_cupo',
+            [
+                'attribute' => 'cur_cupo',
+                'format'    => 'raw',
+                'value'     => function ($model) {
+                    return $model-> getCupo();
+                }
+            ],
             'cur_fechainicio',
             // 'cur_fechafinal',
             // 'cur_presentacion:ntext',
             // 'cur_objetivo:ntext',
             // 'cur_requisitos',
             // 'cur_requerimientos',
-            'cur_duracion',
+            [
+                'attribute' => 'cur_duracion',
+                'format'    => 'raw',
+                'value'     => function ($model) {
+                    return $model-> getDuracion();
+                }
+            ],
             // 'cur_horario:ntext',
-            'cur_costo',
+             [
+                'attribute' => 'cur_costo',
+                'value'     => function ($model) {
+                    return $model-> getCosto();
+                }
+            ],
             // 'cur_formaPago:ntext',
             // 'cur_obtendra',
-            'cur_fkins_id',
+            [
+                'attribute' => 'cur_fkins_id',
+                'format'    => 'raw',
+                'value'     => function ($model) {
+                    return $model-> getInstructor();
+                }
+            ],
             // 'cur_temario',
             // 'cur_procedimiento:ntext',
             // 'cur_contacto:ntext',

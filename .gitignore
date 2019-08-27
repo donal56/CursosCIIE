@@ -43,3 +43,4 @@ requirements.php
 yii.bat
 yii
 
+config/db.php

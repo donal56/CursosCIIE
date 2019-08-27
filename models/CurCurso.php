@@ -166,6 +166,14 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return  '$' . number_format($this->cur_costo, 2);
     }
+    public function getCupo()
+    {
+        return ($this->cur_cupo . " PERSONAS");
+    }
+     public function getDuracion()
+    {
+        return ($this->cur_duracion . " HORAS");
+    }
 
     public function getFormaPago()
     {
