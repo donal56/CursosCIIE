@@ -158,12 +158,6 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return json_decode($this->cur_requerimientos, true);
     }
-
-    public function getDuracion()
-    {
-        return $this->cur_duracion;
-    }
-
     public function getHorario()
     {
         return nl2br($this->cur_horario);
@@ -177,7 +171,7 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return ($this->cur_cupo . " PERSONAS");
     }
-     public function getDuracion()
+    public function getDuracion()
     {
         return ($this->cur_duracion . " HORAS");
     }
