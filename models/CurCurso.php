@@ -118,12 +118,6 @@ class CurCurso extends \yii\db\ActiveRecord
         return $this->hasMany(CurImagenes::className(), ['ima_fkcurso' => 'cur_id']);
     }
 
-    public function getImagen()
-    {
-        $modelo = CurImagenes::findOne($this->cur_id);
-        return $modelo->ima_url;
-    }
-
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -135,6 +129,14 @@ class CurCurso extends \yii\db\ActiveRecord
     public function getDirigido()
     {
         return json_decode($this->cur_dirigido, true);
+    }
+    
+    public function getImagen()
+    {
+        // A checar para varias imagenes
+
+        $modeloImagen= $this->curImagenes[0];
+        return $modeloImagen->ima_url;
     }
 
     public function getPresentacion()
@@ -155,6 +157,11 @@ class CurCurso extends \yii\db\ActiveRecord
     public function getRequerimientos()
     {
         return json_decode($this->cur_requerimientos, true);
+    }
+
+    public function getDuracion()
+    {
+        return $this->cur_duracion;
     }
 
     public function getHorario()

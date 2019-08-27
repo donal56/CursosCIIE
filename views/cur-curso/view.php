@@ -15,20 +15,16 @@
 
     <br>
     <div class= 'myContainer' align= 'center'>
-        <h1 |class= 'display-1' style= 'display: inline'><?= $model->cur_nombre ?></h1>
+        <h1 class= 'display-1' style= 'display: inline'><?= $model->cur_nombre ?></h1>
 
-        <?php 
-                if(!Yii::$app->user->isGuest) 
-                {   
-                    Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil']);
-                    Html::a('', ['delete', 'id' => $model->cur_id], [
-                                'class' => 'glyphicon glyphicon-trash',
-                                'data' =>   [
-                                                'confirm' => 'Estas seguro de eliminar este curso?',
-                                                'method' => 'post'
-                                            ]]);
-                }
-        ?>
+        <?php  if(!Yii::$app->user->isGuest) { ?>
+        <?= Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil']) ?>
+        <?= Html::a('', ['delete', 'id' => $model->cur_id], [
+                'class' => 'glyphicon glyphicon-trash',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ]]); }?>
     </div>
 
     <div class= 'wraper' align= 'center'>
@@ -41,172 +37,167 @@
         <br>
         <br>
 
-            <?php try{ ?>
-           <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Invitan a') ?>
-                <ul class= 'lista'>    
-                <?php 
-                    foreach($model->getDirigido() as $elem)
-                    {
-                        echo "<li class= 'lista'>" . $elem . "</li>";
-                    }
-                ?>
-                </ul>
-            </div>
-            <?php } catch(Exception $e){} ?>
-
-                <!--<?php echo '<pre>'; 
-                    print_r($model->getImagen()); 
-                    echo "</pre>";
-                    echo '<pre>'; 
-                    print_r($model->curImagenes); 
-                    echo "</pre>" ?>--!>
+            <?php if($model->getDirigido()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Invitan a') ?>
+                    <ul class= 'lista'>    
+                    <?php 
+                        foreach($model->getDirigido() as $elem)
+                        {
+                            echo "<li class= 'lista'>" . $elem . "</li>";
+                        }
+                    ?>
+                    </ul>
+                </div>
+            <?php } ?>
             
-            <div class= 'myContainer' align= 'center'>
-                <img src= "/img/CIIE/cursojavaee.png" style= 'width: 100%'>
-            </div>
-
-            <?php echo Carousel::widget([
-                'items' => [
-                    [
-                        'content' => '<img src="'. $model->getImagen() . '"/>',
-                        'caption' => '<h4>This is title</h4><p>This is the caption text</p>',
-                        'options' => [],
-                    ],
-                ]
-            ]); ?>
-
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Presentación del curso') ?>
-                <p align= 'justify'><?php echo $model->getPresentacion(); ?></p>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getImagen()) { ?>
+                <div class= 'myContainer2' align= 'center'>                
+                    <?php echo Carousel::widget([
+                        'showIndicators' => false,
+                        'items' => [
+                            [
+                                'content' => '<img src="'. $model->getImagen() . '"/>',
+                                'caption' => '',
+                                'options' => [],
+                            ],
+                        ]
+                    ]); ?>    
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Objetivo general del curso') ?>
-                <p align= 'justify'><?php echo $model->getObjetivo(); ?></p>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getPresentacion()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Presentación del curso') ?>
+                    <p align= 'justify'><?php echo $model->getPresentacion(); ?></p>
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Requisitos del aspirante') ?>
-                <ul class= 'lista'>    
-                <?php 
-                    foreach($model->getRequisitos() as $elem)
-                    {
-                        echo "<li class= 'lista'>" . $elem . "</li>";
-                    }
-                ?>
-                </ul>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getObjetivo()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Objetivo general del curso') ?>
+                    <p align= 'justify'><?php echo $model->getObjetivo(); ?></p>
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Requerimientos') ?>
-                <ul class= 'lista'>    
-                <?php 
-                    foreach($model->getRequerimientos() as $elem)
-                    {
-                        echo "<li class= 'lista'>" . $elem . "</li>";
-                    }
-                ?>
-                </ul>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getRequisitos()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Requisitos del aspirante') ?>
+                    <ul class= 'lista'>    
+                    <?php 
+                        foreach($model->getRequisitos() as $elem)
+                        {
+                            echo "<li class= 'lista'>" . $elem . "</li>";
+                        }
+                    ?>
+                    </ul>
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Duración') ?>
-                <p align= 'justify'>Horas: <?php echo $model->cur_duracion; ?></p>
-                <p align= 'justify'><?php echo $model->getHorario(); ?></p>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getRequerimientos()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Requerimientos') ?>
+                    <ul class= 'lista'>    
+                    <?php 
+                        foreach($model->getRequerimientos() as $elem)
+                        {
+                            echo "<li class= 'lista'>" . $elem . "</li>";
+                        }
+                    ?>
+                    </ul>
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Costo total') ?>
-                <p align= 'justify'>Horas: <?php echo $model->getCosto(); ?></p>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getDuracion() && $model->getHorario()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Duración') ?>
+                    <p align= 'justify'>Horas: <?php echo $model->getDuracion(); ?></p>
+                    <p align= 'justify'><?php echo $model->getHorario(); ?></p>
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Formas de pago') ?>
-                <ul class= 'lista'>    
-                <?php 
-                    foreach($model->getFormaPago() as $elem)
-                    {
-                        echo "<li class= 'lista'>" . $elem . "</li>";
-                    }
-                ?>
-                </ul>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getCosto()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Costo total') ?>
+                    <p align= 'justify'>Horas: <?php echo $model->getCosto(); ?></p>
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Que obtendrá el participante') ?>
-                <ul class= 'lista'>    
-                <?php 
-                    foreach($model->getObtendra() as $elem)
-                    {
-                        echo "<li class= 'lista'>" . $elem . "</li>";
-                    }
-                ?>
-                </ul>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getFormaPago()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Formas de pago') ?>
+                    <ul class= 'lista'>    
+                    <?php 
+                        foreach($model->getFormaPago() as $elem)
+                        {
+                            echo "<li class= 'lista'>" . $elem . "</li>";
+                        }
+                    ?>
+                    </ul>
+                </div>
+            <?php } ?>
+
+
+            <?php if($model->getObtendra()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Que obtendrá el participante') ?>
+                    <ul class= 'lista'>    
+                    <?php 
+                        foreach($model->getObtendra() as $elem)
+                        {
+                            echo "<li class= 'lista'>" . $elem . "</li>";
+                        }
+                    ?>
+                    </ul>
+                </div>
+            <?php } ?>
 
             
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Instructor') ?>
-                <p align= 'justify'> <?php echo $model->getInstructor(); ?> </p><br>
-                <p align= 'justify'> <?php echo $model->getDescripcionInstructor(); ?> </p>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getInstructor() && $model->getDescripcionInstructor()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Instructor') ?>
+                    <p align= 'justify'> <?php echo $model->getInstructor(); ?> </p><br>
+                    <p align= 'justify'> <?php echo $model->getDescripcionInstructor(); ?> </p>
+                </div>
+            <?php }  ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Procedimiento de inscripción') ?>
-                <ul class= 'lista'>    
-                <?php 
+            <?php if($model->getProcedimiento()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Procedimiento de inscripción') ?>
+                    <ul class= 'lista'>    
+                    <?php 
 
-                    foreach( $model->getProcedimiento() as $elem)
-                    {
-                        echo "<li class= 'lista'>" . $elem . "</li>";
-                    }
-                ?>
-                </ul>
-            </div>
-            <?php } catch(Exception $e){} ?>
+                        foreach( $model->getProcedimiento() as $elem)
+                        {
+                            echo "<li class= 'lista'>" . $elem . "</li>";
+                        }
+                    ?>
+                    </ul>
+                </div>
+            <?php } ?>
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Temario') ?>
-                <?php echo $model->getTemario(); ?>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getTemario()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Temario') ?>
+                    <?php echo $model->getTemario(); ?>
+                </div>
+            <?php } ?>
 
 
-            <?php try{ ?>
-            <div class= 'myContainer'>
-                <?= Html::tag('h4', 'Mayores Informes en:') ?>
-                <p align= 'justify'><?php echo $model->getContacto(); ?></p>
-            </div>
-            <?php } catch(Exception $e){} ?>
+            <?php if($model->getContacto()) { ?>
+                <div class= 'myContainer'>
+                    <?= Html::tag('h4', 'Mayores Informes en:') ?>
+                    <p align= 'justify'><?php echo $model->getContacto(); ?></p>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -216,8 +207,8 @@
 $this->registerCss( 
     "@font-face 
     {
-        font-family: 'SoberanaSans-Regular';
-        src: url('/web/fonts/SoberanaSans-Regular.otf') format('opentype');
+        font-family: SoberanaSans-Regular;
+        src: url('/fonts/SoberanaSans-Regular.otf') format('opentype');
         font-weight: normal;
         font-weight: normal;
     }
@@ -225,6 +216,7 @@ $this->registerCss(
     html
     {
         font-family: SoberanaSans-Regular;
+        font: bold 4vmin 'SoberanaSans';
     }
 
     h1, h2, h3, h4, h5, h6 
@@ -241,7 +233,10 @@ $this->registerCss(
     li.lista::before, .myContainer li::before
     {
         font-weight: bold;
-        content: '» ';
+        content: url('/img/CIIE/bullet.png');
+        padding-right: 0.8em;
+        position: relative;
+        top: 4px;
     }    
     
     ul.lista, li.lista, .myContainer li, .myContainer ul
@@ -257,5 +252,20 @@ $this->registerCss(
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
+    }
+    
+    .myContainer2
+    {
+        padding-bottom: 2em;
+        width: 80%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    
+    .myContainer p
+    {
+        line-height: 1.3em;
     }");
 ?>
