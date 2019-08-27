@@ -87,5 +87,14 @@ class CurParticipante extends \yii\db\ActiveRecord
     {
         return ($this->par_genero == "M") ? "/img/CIIE/women.jpg" :"/img/CIIE/man.jpg" ;
     }
+    public function getGenero()
+    {
+        return ($this->par_genero == "M" ? "Mujer" : "Hombre");
+    }
+     public function getCurso()
+    {
+        $model = CurCurso::findOne((int)$this->par_fkcurso);
+        return mb_strtoupper($model->cur_nombre);
+    }
 
 }

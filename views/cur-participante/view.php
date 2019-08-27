@@ -32,7 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'par_nombre',
             'par_paterno',
             'par_materno',
-            'par_genero',
+            [
+                'attribute' => 'par_genero',
+                'format'    => 'raw',
+                'value'     => function ($model) {
+                    return $model-> getGenero();
+                }
+            ],
             'par_telefono',
             'par_email:email',
             'par_edad',

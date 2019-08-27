@@ -24,18 +24,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'par_id',
+            //'par_id',
             'par_nombre',
             'par_paterno',
             'par_materno',
-            'par_genero',
+            [
+                'attribute' => 'par_genero',
+                'format'    => 'raw',
+                'value'     => function ($model) {
+                    return $model-> getGenero();
+                }
+            ],
             // 'par_telefono',
             // 'par_email:email',
             // 'par_edad',
             // 'par_procedencia',
             // 'par_pagado',
             // 'par_observaciones:ntext',
-            // 'par_fkcurso',
+            [
+                'attribute' => 'par_fkcurso',
+                'format'    => 'raw',
+                'value'     => function ($model) {
+                    return $model-> getCurso();
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
