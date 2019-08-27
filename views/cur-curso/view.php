@@ -19,18 +19,15 @@
     <div class="top_title"><div class="text_bar_shadow"></div>
     <div class="wraper" align= 'center'>
     <h2><?= $model->cur_nombre ?></h2>
-        <?php 
-            if(!Yii::$app->user->isGuest) 
-            {   
-                Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil']);
-                Html::a('', ['delete', 'id' => $model->cur_id], [
+        <?php if(!Yii::$app->user->isGuest) { ?>
+                <?= Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil', 'style' => 'color: #ffffff;']); ?>
+                <?= Html::a('', ['delete', 'id' => $model->cur_id], [
                             'class' => 'glyphicon glyphicon-trash',
+                            'style' => 'color: #ffffff;',
                             'data' =>   [
                                             'confirm' => 'Estas seguro de eliminar este curso?',
                                             'method' => 'post'
-                                        ]]);
-            }
-        ?>
+                                        ]]); } ?>
    
     </div>
     <div class="text_bar_shadow2"></div></div>
