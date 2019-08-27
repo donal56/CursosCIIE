@@ -93,7 +93,7 @@ class CurParticipante extends \yii\db\ActiveRecord
     }
      public function getCurso()
     {
-        $model = CurCurso::findOne((int)$this->par_fkcurso);
+        $model = CurCurso::findOne($this->par_fkcurso);
         return mb_strtoupper($model->cur_nombre);
     }
 

@@ -20,11 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+        'filterModel'  => $searchModel ,
+        'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'cur_id',
+            //'cur_id'  ,
             'cur_nombre',
             //'cur_dirigido',
             [
@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model-> getCupo();
                 }
             ],
-            'cur_fechainicio',
-            // 'cur_fechafinal',
+            'cur_fechainicio'          ,
+            // 'cur_fechafinal'        ,
             // 'cur_presentacion:ntext',
-            // 'cur_objetivo:ntext',
-            // 'cur_requisitos',
-            // 'cur_requerimientos',
+            // 'cur_objetivo:ntext'    ,
+            // 'cur_requisitos'        ,
+            // 'cur_requerimientos'    ,
             [
                 'attribute' => 'cur_duracion',
                 'format'    => 'raw',
