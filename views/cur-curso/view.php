@@ -14,23 +14,29 @@
 <div class="cur-curso-view main-body">
 
     <br>
-    <div class= 'myContainer' align= 'center'>
-        <h1 |class= 'display-1' style= 'display: inline'><?= $model->cur_nombre ?></h1>
-
+    <div class="content_block">
+ <!-- top_title -->
+    <div class="top_title"><div class="text_bar_shadow"></div>
+    <div class="wraper" align= 'center'>
+    <h2><?= $model->cur_nombre ?></h2>
         <?php 
-                if(!Yii::$app->user->isGuest) 
-                {   
-                    Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil']);
-                    Html::a('', ['delete', 'id' => $model->cur_id], [
-                                'class' => 'glyphicon glyphicon-trash',
-                                'data' =>   [
-                                                'confirm' => 'Estas seguro de eliminar este curso?',
-                                                'method' => 'post'
-                                            ]]);
-                }
+            if(!Yii::$app->user->isGuest) 
+            {   
+                Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil']);
+                Html::a('', ['delete', 'id' => $model->cur_id], [
+                            'class' => 'glyphicon glyphicon-trash',
+                            'data' =>   [
+                                            'confirm' => 'Estas seguro de eliminar este curso?',
+                                            'method' => 'post'
+                                        ]]);
+            }
         ?>
+   
+    </div>
+    <div class="text_bar_shadow2"></div></div>
     </div>
 
+  
     <div class= 'wraper' align= 'center'>
         <br>
         <div class= "myContainer">
@@ -257,5 +263,9 @@ $this->registerCss(
         padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
-    }");
+    }
+    .top_title h2{
+        font: bold 4vmin 'SoberanaSans';
+    }
+    ");
 ?>
