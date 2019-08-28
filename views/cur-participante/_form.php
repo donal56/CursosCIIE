@@ -31,7 +31,12 @@ use app\models\CurCurso;
 </div>
 
 <div class="row"> 
-    <?= $form->field($model, 'par_email',['options' => ['class' => (!Yii::$app->user->isGuest ?'form-group col-sm-8':'form-group col-sm-6')]])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'par_email',['options' => 
+                                            ['class' => (!Yii::$app->user->isGuest ? 
+                                                'form-group col-sm-8':'form-group col-sm-6'
+                                            )]
+                                        ])->textInput(['maxlength' => true]) ?>
+
     <?php echo (!Yii::$app->user->isGuest ? $form->field($model, 'par_pagado',['options' => ['class' => 'form-group col-sm-4']])->textInput() : '') ?>
 </div>
 
