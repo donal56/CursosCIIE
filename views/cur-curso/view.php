@@ -193,6 +193,7 @@
             <?php if($model->getTemario()) { ?>
                 <div class= 'myContainer'>
                     <?= Html::tag('h4', 'Temario') ?>
+                    <br>
                     <?php echo $model->getTemario(); ?>
                 </div>
             <?php } ?>
