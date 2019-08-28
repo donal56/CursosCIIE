@@ -131,12 +131,17 @@ class CurCurso extends \yii\db\ActiveRecord
         return json_decode($this->cur_dirigido, true);
     }
     
-    public function getImagen()
+    public function getImagenes()
     {
-        // A checar para varias imagenes
+        $modeloImagenes= $this->curImagenes;
+        $arr= array();
 
-        $modeloImagen= $this->curImagenes[0];
-        return $modeloImagen->ima_url;
+        for($i= 0; $i < sizeOf($modeloImagenes); $i++)
+        {
+            $arr[]= $modeloImagenes[$i]->ima_url;
+        }
+
+        return $arr;
     }
 
     public function getPresentacion()

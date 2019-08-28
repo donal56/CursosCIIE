@@ -20,10 +20,9 @@
     <div class="wraper" align= 'center'>
     <h2><?= $model->cur_nombre ?></h2>
         <?php if(!Yii::$app->user->isGuest) { ?>
-                <?= Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil', 'style' => 'color: #ffffff;']); ?>
+                <?= Html::a('', ['update', 'id' => $model->cur_id], ['class' => 'glyphicon glyphicon-pencil glyph-top-bar']); ?>
                 <?= Html::a('', ['delete', 'id' => $model->cur_id], [
-                            'class' => 'glyphicon glyphicon-trash',
-                            'style' => 'color: #ffffff;',
+                            'class' => 'glyphicon glyphicon-trash glyph-top-bar',
                             'data' =>   [
                                             'confirm' => 'Estas seguro de eliminar este curso?',
                                             'method' => 'post'
@@ -58,18 +57,18 @@
                 </div>
             <?php } ?>
             
-            <?php if($model->getImagen()) { ?>
+            <?php if($model->getImagenes()) { ?>
                 <div class= 'myContainer2' align= 'center'>                
-                    <?php echo Carousel::widget([
-                        'showIndicators' => false,
-                        'items' => [
-                            [
-                                'content' => '<img src="'. $model->getImagen() . '"/>',
-                                'caption' => '',
-                                'options' => [],
-                            ],
-                        ]
-                    ]); ?>    
+                    <?php 
+                        $images= $model->getImagenes();
+                        $arr = array();
+                        
+                        foreach($images as $image)
+                        {
+                           $arr[] = "<img src= '" . $image . "'/>";
+                        }
+                        echo Carousel::widget(['showIndicators' => true, 'items' => $arr]);
+                    ?>    
                 </div>
             <?php } ?>
 
@@ -184,7 +183,8 @@
 
                         foreach( $model->getProcedimiento() as $elem)
                         {
-                            echo "<li class= 'lista'>" . $elem . "</li>";
+                            echo "<li class= 'lista'><span style='display: inline-block;     margin-left: 24px;
+                            vertical-align: top;'>" . $elem . "</span></li>";
                         }
                     ?>
                     </ul>
@@ -274,7 +274,17 @@ $this->registerCss(
     {
         line-height: 1.3em;
     }
-    .top_title h2{
+    
+    .top_title h2
+    {
         font: bold 4vmin 'SoberanaSans';
+    }
+    
+    .glyph-top-bar
+    {
+        color: #ffffff;
+        font-size: 20px;
+        margin: 10px 0;
+        line-height: 40px;
     }");
 ?>
