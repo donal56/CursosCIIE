@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     
         <div class="wraper">
 
-            <div class="content_avatars">
+            <div class="content_avatars" align= "center">
 
                 <?php 
                     foreach ($model->getInscritos() as $participante) {
