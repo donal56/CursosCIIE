@@ -43,6 +43,8 @@ class CurParticipante extends \yii\db\ActiveRecord
             [['par_edad', 'par_fkcurso'], 'integer'],
             [['par_pagado'], 'number'],
             ['par_pagado','compare', 'compareValue' => CurCurso::getCurso()->cur_costo, 'operator' => '<=','message'=>Yii::t('app','Se ha excedido el pago máximo.')],
+            //para invitados no pueden pagar
+            ['par_pagado','compare', 'compareValue' => '0', 'operator' => '<=','message'=>Yii::t('app','Acuda a la oficina correspondiente para registrar su pago'),'on' => 'unlogged'],
             [['par_observaciones'], 'string'],
             [['par_nombre', 'par_paterno', 'par_materno'], 'string', 'max' => 50],
             [['par_email'], 'string', 'max' => 100],

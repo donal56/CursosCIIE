@@ -72,9 +72,12 @@ class CurParticipanteController extends Controller
     public function actionCreate()
     {
         $model = new CurParticipante();
-
+        //si se va a reservar
+        if (Yii::$app->user->isGuest) {
+            $model->setScenario('unlogged');
+        }
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
                 if (Yii::$app->user->isGuest) {
                     return $this->render('reserva');
                 }
