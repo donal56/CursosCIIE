@@ -183,8 +183,7 @@
 
                         foreach( $model->getProcedimiento() as $elem)
                         {
-                            echo "<li class= 'lista'><span style='display: inline-block;     margin-left: 24px;
-                            vertical-align: top;'>" . $elem . "</span></li>";
+                            echo "<li class= 'lista'>" . $elem . "</span></li>";
                         }
                     ?>
                     </ul>
@@ -243,7 +242,9 @@ $this->registerCss(
         content: url('/img/CIIE/bullet.png');
         padding-right: 0.8em;
         position: relative;
-        top: 4px;
+        top: 20px;
+        display: table;
+        right: 25px;
     }    
     
     ul.lista, li.lista, .myContainer li, .myContainer ul
