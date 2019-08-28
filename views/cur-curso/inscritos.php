@@ -53,7 +53,10 @@ use yii\widgets\ActiveForm;
                 
 
              </div>
-            <?= Html::a('Regresar', '/', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a(!Yii::$app->user->isGuest?'Regresar':'Reservar',
+                        !Yii::$app->user->isGuest?'/':'/cur-participante/reservar',
+                        ['class' => 'btn btn-primary']) 
+            ?>
         </h2>
         <!-- /pager_nav -->
     
