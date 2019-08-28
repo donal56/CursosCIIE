@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\CurParticipante */
 
-$this->title = 'Registrar Participante';
+$this->title = (!Yii::$app->user->isGuest ? 'Registrar Participante' : 'Reservar Lugar');
 $this->params['breadcrumbs'][] = ['label' => 'Participantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

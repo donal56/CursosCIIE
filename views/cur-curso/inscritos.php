@@ -30,7 +30,6 @@ use yii\widgets\ActiveForm;
             <div class="content_avatars">
 
                 <?php 
-
                     foreach ($model->getInscritos() as $participante) {
                         echo Html::img($participante->getImage());
                     }
@@ -46,6 +45,13 @@ use yii\widgets\ActiveForm;
                     <font size="6" style="color: #679C67;"> <?= $model->getCupoRestante(); ?></font> participantes.
                 </h3> 
                 <br>
+                <?php if (!Yii::$app->user->isGuest) {  ?>
+                <h3>Reservados: 
+                    <font size="6" style="color: #679C67;"> <?= $model->getCupoReservados(); ?></font> participantes.
+                </h3>
+                <?php }  ?>
+                
+
              </div>
             <?= Html::a('Regresar', '/', ['class' => 'btn btn-primary']) ?>
         </h2>
