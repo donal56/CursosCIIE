@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     
         <div class="wraper">
 
-            <div class="content_avatars" align= "center">
+            <div class="content_avatars">
 
                 <?php 
                     foreach ($model->getInscritos() as $participante) {
@@ -67,6 +67,7 @@ use yii\widgets\ActiveForm;
 $this->registerCss('
     .wraper-ins{
         text-align: -webkit-center;
+        text-align: -moz-center;
     }
     .content_avatars{
         max-width: 650px;
