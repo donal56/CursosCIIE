@@ -39,16 +39,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'par_email:email',
             // 'par_edad',
             // 'par_procedencia',
-            // 'par_pagado',
+            'par_pagado',
             // 'par_observaciones:ntext',
-            [
+           /* [
                 'attribute' => 'par_fkcurso',
                 'format'    => 'raw',
                 'value'     => function ($model) {
                     return $model-> getCurso();
                 }
             ],
-
+             */
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

@@ -23,7 +23,7 @@ class CurParticipanteController extends Controller
             'access' => 
             [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => ['index','create','update','view'],
+                'only' => ['index','create','update'],
                 'rules' => 
                 [
                     // allow authenticated users
@@ -74,13 +74,25 @@ class CurParticipanteController extends Controller
         $model = new CurParticipante();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->par_id]);
+
+                if (Yii::$app->user->isGuest) {
+                    return $this->render('reserva');
+                }
+                
+                return $this->redirect(['view', 'id' => $model->par_id]);
+            
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
+
+    public function actionReservar()
+    {
+        return $this->actionCreate();
+    }
+
 
     /**
      * Updates an existing CurParticipante model.

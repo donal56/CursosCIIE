@@ -31,12 +31,12 @@ use app\models\CurCurso;
 </div>
 
 <div class="row"> 
-    <?= $form->field($model, 'par_email',['options' => ['class' => 'form-group col-sm-8']])->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'par_pagado',['options' => ['class' => 'form-group col-sm-4']])->textInput() ?>
+    <?= $form->field($model, 'par_email',['options' => ['class' => (!Yii::$app->user->isGuest ?'form-group col-sm-8':'form-group col-sm-6')]])->textInput(['maxlength' => true]) ?>
+    <?php echo (!Yii::$app->user->isGuest ? $form->field($model, 'par_pagado',['options' => ['class' => 'form-group col-sm-4']])->textInput() : '') ?>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'par_observaciones',['options' => ['class' => 'form-group col-sm-12']])->textarea(['rows' => 2]) ?>  
+    <?php echo (!Yii::$app->user->isGuest ? $form->field($model, 'par_observaciones',['options' => ['class' => 'form-group col-sm-12']])->textarea(['rows' => 2]) : '') ?>  
 </div>
 
     <?= $form->field($model, 'par_fkcurso')->hiddenInput(['value'=>CurCurso::getCurso()->cur_id])->label(false); ?>

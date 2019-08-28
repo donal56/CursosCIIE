@@ -19,15 +19,17 @@ NavBar::begin([
 
 $menuItems = [
     ['label' => '<span class="glyphicon glyphicon-home"></span>', 'url' => ['/cur-curso/view']],
-    ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']],
 ];
 if (Yii::$app->user->isGuest) {
+  $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
+  $menuItems[] = ['label' => 'Reservar Lugar', 'url' => ['/cur-participante/reservar']];
   $menuItems[] = ['label' => 'Iniciar Sesión', 'url' => ['/user-management/auth/login']];
 } else {
   
   //Agregar opciones de administrador
   //if(Yii::$app->user->identity->hasRole('Admin')):
     $menuItems[] = ['label' => 'Administrador', 'items'=>UserManagementModule::menuItems()];
+    $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
     $menuItems[] = ['label' => 'Gestionar Participantes', 'url' => ['/cur-participante/index']];
   //endif;
   $menuItems[] = [

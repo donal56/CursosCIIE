@@ -235,11 +235,17 @@ class CurCurso extends \yii\db\ActiveRecord
         }
     }
 
-    public function getCupoRestante(){
-        return ( $this->cur_cupo - count($this->getInscritos()) );
-    }
+
     public function getCountInsctritos(){
         return count($this->getInscritos());
+    }
+
+    public function getCupoRestante(){
+        return ( $this->cur_cupo - $this->getCountInsctritos());
+    }
+
+    public function getCupoReservados(){
+        return ( count(CurParticipante::findAll(['par_fkcurso' => $this->cur_id,'par_pagado' => 0])) );
     }
 
     public static function getCurso()
