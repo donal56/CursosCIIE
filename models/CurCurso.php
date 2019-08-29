@@ -99,12 +99,13 @@ class CurCurso extends \yii\db\ActiveRecord
         $this->cur_requerimientos = Json::decode($this->cur_requerimientos);
     }*/
 
-    public function beforeGuardar() {
+    /*public function beforeGuardar() {
         $this->cur_dirigido = Json::encode($this->cur_dirigido);
         $this->cur_requisitos = Json::encode($this->cur_requisitos);
         $this->cur_requerimientos = Json::encode($this->cur_requerimientos);
     }
-
+    */
+    
     /**
      * @return \yii\db\ActiveQuery
      */
