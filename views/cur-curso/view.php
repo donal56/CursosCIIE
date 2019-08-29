@@ -337,7 +337,7 @@ $this->registerCss(
 
     .share_story ul li a.whatsapp 
     {
-        background-position: -337px 1px;
+        background-position: -336px 1px;
     }
     
     .share_story span.share_bg
@@ -374,5 +374,15 @@ $this->registerCss(
         {
             padding-right: 3em;
         }
+    }
+    
+    a.glyphicon:hover
+    {
+        color: #bff;   
+    }
+    
+    .share_story ul li a.whatsapp:hover 
+    {
+        background-position: -333px -46px;
     }");
 ?>
