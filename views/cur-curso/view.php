@@ -38,7 +38,7 @@
         <br>
         <div class= "myContainer gray">
            <h2 class= 'encabezado'> El Instituto Tecnológico de Villahermosa y el Centro de Incubación e Innovación Empresarial</h2>
-           <h4 class= 'encabezado'>Esta página ha sido visitada <font style="color: #679C67;" size="5"><?= Utilidades::contadorVisitas($model->getNombre()) ?></font> veces.</h4>
+           <h4 class= 'encabezado'>Esta página ha sido visitada <font style="color: #679C67;" size="5"><?= Utilidades::contadorVisitas($model->cur_id) ?></font> veces.</h4>
         </div>
 
         <div class= 'blog_entries-1 gray' align= 'left'>
