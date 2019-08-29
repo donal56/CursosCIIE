@@ -66,7 +66,7 @@ class CurParticipante extends \yii\db\ActiveRecord
             'par_nombre' => 'Nombre',
             'par_paterno' => 'Apellido Paterno',
             'par_materno' => 'Apellido Materno',
-            'par_genero' => 'Genero',
+            'par_genero' => 'Género',
             'par_telefono' => 'Telefono',
             'par_email' => 'Email',
             'par_edad' => 'Edad',
