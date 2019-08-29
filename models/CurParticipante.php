@@ -87,7 +87,7 @@ class CurParticipante extends \yii\db\ActiveRecord
 
     public function getImage()
     {
-        return ($this->par_genero == "M") ? "/img/CIIE/women.jpg" :"/img/CIIE/man.jpg" ;
+        return ($this->par_genero == "M") ? "/img/women.jpg" :"/img/man.jpg" ;
     }
     public function getGenero()
     {

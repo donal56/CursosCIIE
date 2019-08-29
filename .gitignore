@@ -43,5 +43,8 @@ requirements.php
 yii.bat
 yii
 
+#BD
 config/db.php
-config/db.php
+
+#Excepto
+!components/Utilidades.php

@@ -67,6 +67,8 @@ use unclead\multipleinput\MultipleInput;
 
     <?= $form->field($model, 'cur_observaciones')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'cur_archivo')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

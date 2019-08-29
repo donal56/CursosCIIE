@@ -2,6 +2,9 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\CurCurso;
+
+$this->title = 'Inscritos';
+
 ?>
 
 <div class="wraper">

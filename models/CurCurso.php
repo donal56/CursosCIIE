@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\web\NotFoundHttpException;
 use \yii\helpers\Json;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "cur_curso".
@@ -27,8 +28,8 @@ use \yii\helpers\Json;
  * @property integer $cur_fkins_id
  * @property string $cur_temario
  * @property string $cur_procedimiento
- * @property string $cur_contacto
  * @property string $cur_observaciones
+ * @property string $cur_archivo
  *
  * @property CurInstructor $curFkins
  * @property CurImagenes[] $curImagenes
@@ -56,6 +57,7 @@ class CurCurso extends \yii\db\ActiveRecord
             [['cur_fechainicio', 'cur_fechafinal'], 'safe'],
             [['cur_costo'], 'number'],
             [['cur_nombre'], 'string', 'max' => 150],
+            [['cur_archivo'], 'string', 'max' => 255],
             [['cur_fkins_id'], 'exist', 'skipOnError' => true, 'targetClass' => CurInstructor::className(), 'targetAttribute' => ['cur_fkins_id' => 'ins_id']],
         ];
     }
@@ -86,6 +88,7 @@ class CurCurso extends \yii\db\ActiveRecord
             'cur_procedimiento' => 'Procedimiento',
             'cur_contacto' => 'Contacto',
             'cur_observaciones' => 'Observaciones',
+            'cur_archivo' => 'Archivo adjunto',
         ];
     }
 
@@ -125,6 +128,11 @@ class CurCurso extends \yii\db\ActiveRecord
     public function getCurParticipantes()
     {
         return $this->hasMany(CurParticipante::className(), ['par_fkcurso' => 'cur_id']);
+    }
+
+    public function getNombre()
+    {
+        return $this->cur_nombre;
     }
 
     public function getDirigido()
@@ -231,6 +239,11 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return nl2br($this->cur_contacto);
     }
+
+    public function getURLArchivo()
+    {
+        return Url::base(true) . $this->cur_archivo;
+    }
     
     public function getInscritos()
     {
@@ -240,7 +253,6 @@ class CurCurso extends \yii\db\ActiveRecord
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 
     public function getCountInsctritos(){
         return count($this->getInscritos());
@@ -262,4 +274,5 @@ class CurCurso extends \yii\db\ActiveRecord
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
