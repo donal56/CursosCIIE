@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use app\models\CurCurso;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\CurParticipanteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,7 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Registrar Participante', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php
+        if (CurCurso::getCurso()->getCupoRestante()>0) { 
+            echo Html::a('Registrar Participante', ['create'], ['class' => 'btn btn-success']);
+        }else{
+            echo Html::Button('Cupo Lleno' ,['class' => 'btn btn-danger']);
+        }
+   
+         ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,

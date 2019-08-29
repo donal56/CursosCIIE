@@ -1,6 +1,7 @@
 <?php 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\CurCurso;
 ?>
 
 <div class="wraper">
@@ -53,9 +54,16 @@ use yii\widgets\ActiveForm;
                 
 
              </div>
-            <?= Html::a(!Yii::$app->user->isGuest?'Regresar':'Reservar',
-                        !Yii::$app->user->isGuest?'/':'/cur-participante/reservar',
-                        ['class' => 'btn btn-primary']) 
+            <?php 
+                if (Yii::$app->user->isGuest) { 
+                    echo Html::a(CurCurso::getCurso()->getCupoRestante()>0 ?'Reservar':'Cupo Lleno',
+                                 CurCurso::getCurso()->getCupoRestante()>0 ? '/cur-participante/reservar':'',
+                    ['class' =>  CurCurso::getCurso()->getCupoRestante()>0 ?'btn btn-primary':'btn btn-danger']); 
+
+                }else{
+                    echo Html::a('Regresar','/',['class' => 'btn btn-primary']);
+                }
+
             ?>
         </h2>
         <!-- /pager_nav -->
