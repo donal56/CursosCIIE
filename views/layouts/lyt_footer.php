@@ -6,8 +6,6 @@
             <li class="facebook"><a href="http://www.facebook.com/ITVillahermosa">Facebook</a></li>
             <li class="twitter"><a href="http://twitter.com/itvh">Twitter</a></li>
             <li class="rss"><a href="http://www.youtube.com/user/ITVillahermosa1">YouTube</a></li>
-            <li class="google"><a href="https://plus.google.com/101013671265577542882">Google+</a></li>
-            <li class="rss"><a href="/rss.xml">RSS</a></li>
         </ul>
     </div>
 </div>
