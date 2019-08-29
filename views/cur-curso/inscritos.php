@@ -64,20 +64,4 @@ use yii\widgets\ActiveForm;
        
 </div>
 
-
-
-<?php 
-$this->registerCss('
-    .wraper-ins{
-        text-align: -webkit-center;
-        text-align: -moz-center;
-    }
-    .content_avatars{
-        max-width: 650px;
-        text-align: left;
-    }
-    @media only screen and (max-width: 479px) {
-        .wraper{width:95%;}
-    }
-');
- ?>
+<?= $this->registerCssFile("/css/cur-form.css");   ?>

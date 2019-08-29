@@ -1,7 +1,20 @@
-h1
+.wraper h1
 {
 	margin-bottom: .5em !important;
 	text-align: center;
-	font-size: x-large;
+}
+.wraper-ins
+{
+        text-align: -webkit-center;
+        text-align: -moz-center;
+}
+.content_avatars
+{
+        max-width: 650px;
+        text-align: left;
+}
+@media only screen and (max-width: 479px) 
+{
+        .wraper{width:95%;}
 }
     
