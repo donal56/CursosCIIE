@@ -272,7 +272,11 @@ class Utilidades
     {
 		$curso= str_replace(' ', '_', $curso);
 		
-      session_start();
+        if(!isset($_SESSION)) 
+	    { 
+	        session_start(); 
+	    } 
+	    
       $nombreContador = Yii::getAlias('@webroot/counters/visitas_' . $curso . '.txt');
 	  
       #Compruebe si existe un archivo de texto. Si no crear uno e inicializarlo a cero.
@@ -290,7 +294,7 @@ class Utilidades
       #¿Se ha contado al visitante en esta sesión?
       #Si no es así, aumente el valor del contador en uno
       if(!isset($_SESSION['visitado' . $curso])){
-        $_SESSION['visitado' . curso] = "y";
+        $_SESSION['visitado' . $curso] = "y";
         $contadorValor++;
         $f = fopen($nombreContador, "w");
         fwrite($f, $contadorValor);
