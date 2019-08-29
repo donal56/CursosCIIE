@@ -240,7 +240,7 @@
                             <td width='5%' valign='top'></td>
                             <td width='60%'><?php echo $model->getNombre(); ?></td>
                             <td valign='top'><?php echo Html::a('Descargar', $model->getURLArchivo(), ['class'=>'btn-success btn_col btn_green','type'=>'button']);?></td>
-                            <td width='20%' valign='top'><?php echo '1'; ?> descargas</td>
+                            <!--<td width='20%' valign='top'><?php echo '1'; ?> descargas</td>--!>
                         </tr>
                     </table>
                 <div>
@@ -360,5 +360,19 @@ $this->registerCss(
     {
         left: 21em;
         top: 0px;
+    }
+    
+    @media only screen and (max-width: 800px)
+    {
+        .share_story ul 
+        {
+            left: -2em;
+            top: 0px;
+        }
+
+        .share_story ul li 
+        {
+            padding-right: 3em;
+        }
     }");
 ?>
