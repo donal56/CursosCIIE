@@ -115,7 +115,7 @@ use app\models\CurInstructor;
 
     <?= $form->field($model, 'cur_observaciones')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
-    ]) ?>
+    ])->label('En caso de necesitar agregar informacion extra, puede agregarlo en el siguiente espacio:') ?>
 
     <?= $form->field($model, 'cur_archivo')->textInput(['maxlength' => true]) ?>
 
