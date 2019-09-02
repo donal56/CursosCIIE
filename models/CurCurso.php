@@ -5,6 +5,8 @@ namespace app\models;
 use Yii;
 use yii\web\NotFoundHttpException;
 use \yii\helpers\Json;
+use yii\helpers\Url;
+
 
 /**
  * This is the model class for table "cur_curso".
@@ -27,8 +29,8 @@ use \yii\helpers\Json;
  * @property integer $cur_fkins_id
  * @property string $cur_temario
  * @property string $cur_procedimiento
- * @property string $cur_contacto
  * @property string $cur_observaciones
+ * @property string $cur_archivo
  *
  * @property CurInstructor $curFkins
  * @property CurImagenes[] $curImagenes
@@ -51,11 +53,12 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return [
             [['cur_nombre'], 'required'],
-            [['cur_dirigido', 'cur_presentacion', 'cur_objetivo', 'cur_requisitos', 'cur_requerimientos', 'cur_horario', 'cur_formaPago', 'cur_obtendra', 'cur_temario', 'cur_procedimiento', 'cur_contacto', 'cur_observaciones'], 'string'],
+            [['cur_dirigido', 'cur_presentacion', 'cur_objetivo', 'cur_requisitos', 'cur_requerimientos', 'cur_horario', 'cur_formaPago', 'cur_obtendra', 'cur_temario', 'cur_procedimiento', 'cur_contacto', 'cur_observaciones'],  'safe'],
             [['cur_cupo', 'cur_duracion', 'cur_fkins_id'], 'integer'],
             [['cur_fechainicio', 'cur_fechafinal'], 'safe'],
             [['cur_costo'], 'number'],
             [['cur_nombre'], 'string', 'max' => 150],
+            [['cur_archivo'], 'string', 'max' => 255],
             [['cur_fkins_id'], 'exist', 'skipOnError' => true, 'targetClass' => CurInstructor::className(), 'targetAttribute' => ['cur_fkins_id' => 'ins_id']],
         ];
     }
@@ -86,20 +89,31 @@ class CurCurso extends \yii\db\ActiveRecord
             'cur_procedimiento' => 'Procedimiento',
             'cur_contacto' => 'Contacto',
             'cur_observaciones' => 'Observaciones',
+            'cur_archivo' => 'Archivo adjunto',
         ];
     }
 
-   /* public function afterFind() {
+    public function afterFind() {
+        //multi-input extraer datos del la bd en formato json y convertirlos a array
         parent::afterFind();
-        $this->cur_dirigido = Json::decode($this->cur_dirigido);
-        $this->cur_requisitos = Json::decode($this->cur_requisitos);
+        $this->cur_dirigido       = Json::decode($this->cur_dirigido);
+        $this->cur_requisitos     = Json::decode($this->cur_requisitos);
         $this->cur_requerimientos = Json::decode($this->cur_requerimientos);
-    }*/
+        $this->cur_formaPago      = Json::decode($this->cur_formaPago);
+        $this->cur_obtendra       = Json::decode($this->cur_obtendra);
+        $this->cur_procedimiento  = Json::decode($this->cur_procedimiento);
+    }
 
-    public function beforeGuardar() {
-        $this->cur_dirigido = Json::encode($this->cur_dirigido);
-        $this->cur_requisitos = Json::encode($this->cur_requisitos);
+    //convertir array a string
+    public function preGuardar()
+    {
+        $this->cur_dirigido       = Json::encode($this->cur_dirigido);
+        $this->cur_requisitos     = Json::encode($this->cur_requisitos);
         $this->cur_requerimientos = Json::encode($this->cur_requerimientos);
+        $this->cur_formaPago      = Json::encode($this->cur_formaPago);
+        $this->cur_obtendra       = Json::encode($this->cur_obtendra);
+        $this->cur_procedimiento  = Json::encode($this->cur_procedimiento);
+        return true;
     }
 
     /**
@@ -126,9 +140,14 @@ class CurCurso extends \yii\db\ActiveRecord
         return $this->hasMany(CurParticipante::className(), ['par_fkcurso' => 'cur_id']);
     }
 
+    public function getNombre()
+    {
+        return $this->cur_nombre;
+    }
+
     public function getDirigido()
     {
-        return json_decode($this->cur_dirigido, true);
+        return $this->clr($this->cur_dirigido);
     }
     
     public function getImagenes()
@@ -156,12 +175,12 @@ class CurCurso extends \yii\db\ActiveRecord
 
     public function getRequisitos()
     {
-        return json_decode($this->cur_requisitos, true);
+        return $this->clr($this->cur_requisitos);
     }
 
     public function getRequerimientos()
     {
-        return json_decode($this->cur_requerimientos, true);
+        return $this->clr($this->cur_requerimientos);
     }
     public function getHorario()
     {
@@ -183,12 +202,12 @@ class CurCurso extends \yii\db\ActiveRecord
 
     public function getFormaPago()
     {
-        return json_decode($this->cur_formaPago, true);
+        return $this->clr($this->cur_formaPago);
     }
 
     public function getObtendra()
     {
-        return json_decode($this->cur_obtendra, true);
+        return $this->clr($this->cur_obtendra);
     }
 
     public function getInstructor()
@@ -218,7 +237,7 @@ class CurCurso extends \yii\db\ActiveRecord
 
     public function getProcedimiento()
     {
-        return json_decode($this->cur_procedimiento, true);
+        return $this->clr($this->cur_procedimiento);
     }
 
     public function getTemario()
@@ -230,6 +249,11 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return nl2br($this->cur_contacto);
     }
+
+    public function getURLArchivo()
+    {
+        return Url::base(true) . $this->cur_archivo;
+    }
     
     public function getInscritos()
     {
@@ -239,7 +263,6 @@ class CurCurso extends \yii\db\ActiveRecord
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
 
     public function getCountInsctritos(){
         return count($this->getInscritos());
@@ -253,6 +276,18 @@ class CurCurso extends \yii\db\ActiveRecord
         return ( count(CurParticipante::findAll(['par_fkcurso' => $this->cur_id,'par_pagado' => 0])) );
     }
 
+    public function clr($att){
+        $temp  = [];
+        //desencapsular el array para la vista
+        foreach($att as &$elem)
+        {
+            array_push($temp, array_pop($elem));
+          
+        }
+       
+        return $temp;
+    }
+
     public static function getCurso()
     {
         if (($model = CurCurso::find()->one()) !== null) {
@@ -261,4 +296,5 @@ class CurCurso extends \yii\db\ActiveRecord
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

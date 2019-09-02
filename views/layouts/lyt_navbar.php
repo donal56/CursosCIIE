@@ -2,6 +2,7 @@
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use webvimark\modules\UserManagement\UserManagementModule;
+use app\models\CurCurso;
 ?>
 
 <?php
@@ -21,9 +22,14 @@ $menuItems = [
     ['label' => '<span class="glyphicon glyphicon-home"></span>', 'url' => ['/cur-curso/view']],
 ];
 if (Yii::$app->user->isGuest) {
-  $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
-  $menuItems[] = ['label' => 'Reservar Lugar', 'url' => ['/cur-participante/reservar']];
+    $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
+//oculta reservar si el cupo esta lleno
+  if (CurCurso::getCurso()->getCupoRestante()>0) { 
+    $menuItems[] = ['label' => 'Reservar Lugar', 'url' => ['/cur-participante/reservar']];
+  }
+
   $menuItems[] = ['label' => 'Iniciar Sesión', 'url' => ['/user-management/auth/login']];
+
 } else {
   
   //Agregar opciones de administrador

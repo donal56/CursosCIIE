@@ -8,6 +8,7 @@ use app\models\CurParticipanteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\CurCurso;
 
 /**
  * CurParticipanteController implements the CRUD actions for CurParticipante model.
@@ -23,14 +24,27 @@ class CurParticipanteController extends Controller
             'access' => 
             [
                 'class' => \yii\filters\AccessControl::className(),
-                'only' => ['index','create','update'],
+                'only' => ['index','create','update','reservar'],
                 'rules' => 
                 [
                     // allow authenticated users
                     [
+                        'actions' =>  ['index','update'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                     //si el cupo esta lleno se inhabilita acceder a la accion create y reservar
+                    [
+                        'actions' =>  ['create'],
+                        'allow' => (CurCurso::getCurso()->getCupoRestante()>0),
+                        'roles' => ['@'],
+                    ],
+                    [
+                       
+                        'actions' =>  ['reservar'],
+                        'allow' => (CurCurso::getCurso()->getCupoRestante()>0),
+                    ],
+                  
                     // everything else is denied
                 ],
             ],

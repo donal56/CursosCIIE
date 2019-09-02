@@ -1,11 +1,12 @@
 #template framework files
 /assets
 /commands
-/components
 /config
 /mail
 /runtime
 /tests
+/web/counters
+/components/widgets
 /widgets
 
 # phpstorm project files
@@ -43,5 +44,5 @@ requirements.php
 yii.bat
 yii
 
-config/db.php
+#BD
 config/db.php

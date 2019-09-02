@@ -1,6 +1,10 @@
 <?php 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\CurCurso;
+
+$this->title = 'Inscritos';
+
 ?>
 
 <div class="wraper">
@@ -53,7 +57,17 @@ use yii\widgets\ActiveForm;
                 
 
              </div>
-            <?= Html::a('Regresar', '/', ['class' => 'btn btn-primary']) ?>
+            <?php 
+                if (Yii::$app->user->isGuest) { 
+                    echo Html::a(CurCurso::getCurso()->getCupoRestante()>0 ?'Reservar':'Cupo Lleno',
+                                 CurCurso::getCurso()->getCupoRestante()>0 ? '/cur-participante/reservar':'',
+                    ['class' =>  CurCurso::getCurso()->getCupoRestante()>0 ?'btn btn-primary':'btn btn-danger']); 
+
+                }else{
+                    echo Html::a('Regresar','/',['class' => 'btn btn-primary']);
+                }
+
+            ?>
         </h2>
         <!-- /pager_nav -->
     
@@ -61,20 +75,4 @@ use yii\widgets\ActiveForm;
        
 </div>
 
-
-
-<?php 
-$this->registerCss('
-    .wraper-ins{
-        text-align: -webkit-center;
-        text-align: -moz-center;
-    }
-    .content_avatars{
-        max-width: 650px;
-        text-align: left;
-    }
-    @media only screen and (max-width: 479px) {
-        .wraper{width:95%;}
-    }
-');
- ?>
+<?= $this->registerCssFile("/css/cur-form.css");   ?>
