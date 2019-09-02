@@ -91,18 +91,6 @@ use app\models\CurInstructor;
         'options' => ['rows' => 6],
         'preset' => 'basic'
     ]) ?>
-    <?php CKEditorInline::begin(['preset' => 'custom', 'clientOptions' => [
-    'extraPlugins' => 'pbckcode',
-    'toolbarGroups' => [
-        ['name' => 'undo'],
-        ['name' => 'basicstyles', 'groups' => ['basicstyles', 'cleanup']],
-        ['name' => 'colors'],
-        ['name' => 'links', 'groups' => ['links', 'insert']],
-        ['name' => 'others', 'groups' => ['others', 'about']],
-        
-        ['name' => 'pbckcode'] // <--- OUR NEW PLUGIN YAY!
-    ]
-]]) ?>
 
 
     <?php
