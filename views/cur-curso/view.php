@@ -60,7 +60,8 @@
             <?php } ?>
             
             <?php if($model->getImagenes()) { ?>
-                <div class= 'myContainer2' align= 'center'>                
+                <div class= 'myContainer2' align= 'center'>
+                    <?= Html::tag('h4', 'A participar en el', ['class' => 'encabezado']) ?>         
                     <?php 
                         $images= $model->getImagenes();
                         $arr = array();
@@ -133,7 +134,7 @@
             <?php if($model->getCosto()) { ?>
                 <div class= 'myContainer'>
                     <?= Html::tag('h4', 'Costo total', ['class' => 'encabezado']) ?>
-                    <p align= 'justify'>Horas: <?php echo $model->getCosto(); ?></p>
+                    <p align= 'justify'><?php echo $model->getCosto(); ?></p>
                 </div>
             <?php } ?>
 
@@ -225,7 +226,7 @@
                         </li>
                         <li><a class="tweeter" href="javascript: void(0);" onclick="window.open('http://twitter.com/?status=' + texto + dir2 + '%20vía @itvh', 'ventanacompartir', 'toolbar=0, status=0, width=650, height=450');"></a>
                         </li>
-                        <li> <a  class="whatsapp" onclick="window.open('whatsapp://send?text=' + texto + dir2, 'ventanacompartir', 'toolbar=0, status=0, width=650, height=450');" data-action="share/whatsapp/share"><img border="0" width="64px" height="64px"></a></li>
+                        <li> <a  class="whatsapp" onclick="window.open(' https://wa.me/?text=' + texto + dir2, 'ventanacompartir', 'toolbar=0, status=0, width=650, height=450');" data-action="share/whatsapp/share"><img border="0" width="64px" height="64px"></a></li>
                     </ul>
                 </div> 
             </div>
