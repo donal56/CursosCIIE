@@ -41,30 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'par_telefono',
             'par_email:email',
-
-            [
-                'attribute' => 'par_edad',
-                'format'    => 'raw',
-                'value'     => function ($model) {
-                    return $model-> getEdad();
-                }
-            ],
+            'par_edad',
             'par_procedencia',
-            [
-                'attribute' => 'par_pagado',
-                'format'    => 'raw',
-                'value'     => function ($model) {
-                    return $model-> getPagado();
-                }
-            ],
+            'par_pagado',
             'par_observaciones:ntext',
-            [
-                'attribute' => 'par_fkcurso',
-                'format'    => 'raw',
-                'value'     => function ($model) {
-                    return $model-> getCurso();
-                }
-            ],
+            'par_fkcurso',
         ],
     ]) ?>
 
