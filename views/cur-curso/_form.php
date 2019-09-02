@@ -89,7 +89,7 @@ use app\models\CurInstructor;
 
     <?= $form->field($model, 'cur_temario')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
-        'preset' => 'basic'
+        'preset' => 'basic',
     ]) ?>
 
 
