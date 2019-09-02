@@ -93,10 +93,19 @@ class CurParticipante extends \yii\db\ActiveRecord
     {
         return ($this->par_genero == "M" ? "Mujer" : "Hombre");
     }
-     public function getCurso()
+    public function getCurso()
     {
         $model = CurCurso::findOne($this->par_fkcurso);
         return mb_strtoupper($model->cur_nombre);
     }
+    public function getPagado()
+    {
+        return "$".$this->par_pagado;
+    }
+    public function getEdad()
+    {
+        return $this->par_edad." AÑOS";
+    }
+
 
 }
