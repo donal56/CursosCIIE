@@ -201,17 +201,16 @@
                 </div>
             <?php } ?>
 
+            <?php if($model->getObservaciones()) { ?>
+                <div class= 'myContainer'>
+                    <p align= 'justify'><?php echo $model->getObservaciones(); ?></p>
+                </div>
+            <?php } ?>
 
             <?php if($model->getContacto()) { ?>
                 <div class= 'myContainer'>
                     <?= Html::tag('h4', 'Mayores Informes en:', ['class' => 'encabezado']) ?>
                     <p align= 'justify'><?php echo $model->getContacto(); ?></p>
-                </div>
-            <?php } ?>
-
-            <?php if($model->getObservaciones()) { ?>
-                <div class= 'myContainer'>
-                    <p align= 'justify'><?php echo $model->getObservaciones(); ?></p>
                 </div>
             <?php } ?>
 
