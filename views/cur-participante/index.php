@@ -61,3 +61,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
+
+<?= $this->registerCssFile("/css/cur-form.css");   ?>
