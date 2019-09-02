@@ -250,6 +250,11 @@ class CurCurso extends \yii\db\ActiveRecord
         return nl2br($this->cur_contacto);
     }
 
+    public function getObservaciones()
+    {
+        return $this->cur_observaciones;
+    }
+
     public function getURLArchivo()
     {
         return Url::base(true) . $this->cur_archivo;

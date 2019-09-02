@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use uii\filters\AccessControl;
+use app\components\Utilidades;
 
 /**
  * CurCursoController implements the CRUD actions for CurCurso model.
@@ -122,6 +123,15 @@ class CurCursoController extends Controller
         return $this->render('inscritos', [
                'model' =>  $this->findModel($id),
         ]);
+    }
+
+    public function actionDescargar($id)
+    {
+        #Action de descargar archivo, incrementa el contador
+        $url= CurCurso::findOne($id)->getURLArchivo();
+        Utilidades::increaseDescargas($id);
+
+        return $this->redirect($url);
     }
     
     /**

@@ -270,38 +270,64 @@ class Utilidades
 
     public static function contadorVisitas($curso)
     {
-		$curso= str_replace(' ', '_', $curso);
-		
-        if(!isset($_SESSION)) 
+      #Crear una sesión si no existe
+      if(!isset($_SESSION)) 
 	    { 
-	        session_start(); 
+        session_start();
 	    } 
-	    
+      
+      #Directorio del contador
       $nombreContador = Yii::getAlias('@webroot/counters/visitas_' . $curso . '.txt');
 	  
-      #Compruebe si existe un archivo de texto. Si no crear uno e inicializarlo a cero.
-      if (!file_exists($nombreContador)) {
+      #Compruebe si existe un archivo de texto. Si no crear uno e inicializarlo a cero visitas y cero descargas.
+      if (!file_exists($nombreContador)) 
+      {
         $f = fopen($nombreContador, "w");
-        fwrite($f,"0");
+        fwrite($f, "0" . PHP_EOL . "0");
         fclose($f);
       }
-	  
-      #Leer el valor actual de nuestro archivo de contador
-      $f = fopen($nombreContador,"r");
-      $contadorValor = fread($f, filesize($nombreContador));
-      fclose($f);
-	  
+
+      #Recuperando las lineas como un arreglo
+      $lines = file($nombreContador);
+      $dVisitas= (int)$lines[0];
+      $dArchivos = $lines[1];
+
       #¿Se ha contado al visitante en esta sesión?
       #Si no es así, aumente el valor del contador en uno
-      if(!isset($_SESSION['visitado' . $curso])){
-        $_SESSION['visitado' . $curso] = "y";
-        $contadorValor++;
-        $f = fopen($nombreContador, "w");
-        fwrite($f, $contadorValor);
-        fclose($f); 
+      if(!isset($_SESSION['visitado' . $curso]))
+      {
+        $_SESSION['visitado' . $curso] = "true";
+        $dVisitas++;
+        file_put_contents($nombreContador, $dVisitas . PHP_EOL . $dArchivos);
       }
 	  
-      return $contadorValor;
+      return $dVisitas;
+    }
+
+    public static function getDescargas($curso)
+    {
+      #Directorio del contador
+      $nombreContador = Yii::getAlias('@webroot/counters/visitas_' . $curso . '.txt');
+
+      #Recuperando las lineas como un arreglo
+      $lines = file($nombreContador);
+      $dArchivos = $lines[1]; 
+	  
+      return $dArchivos;
+    }
+
+    public static function increaseDescargas($curso)
+    {
+      #Directorio del contador
+      $nombreContador = Yii::getAlias('@webroot/counters/visitas_' . $curso . '.txt');
+
+      #Recuperando las lineas como un arreglo e incrementando las descargas
+      $lines = file($nombreContador);
+      $dVisitas= (int)$lines[0];
+      $dArchivos = (int)$lines[1] + 1;
+
+      #Guardando los datos
+      file_put_contents($nombreContador, $dVisitas . PHP_EOL . $dArchivos);
     }
     
    public static function formatoFecha($f) 
