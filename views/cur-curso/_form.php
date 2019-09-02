@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use unclead\multipleinput\MultipleInput;
+use kartik\date\DatePicker;
 use dosamigos\ckeditor\CKEditor;
 use app\models\CurInstructor;
 
@@ -18,6 +19,53 @@ use app\models\CurInstructor;
 
     <?= $form->field($model, 'cur_nombre')->textInput(['maxlength' => true]) ?>
 
+<div class="row"> 
+
+    <?php
+        echo $form->field($model, 'cur_fechainicio', ['options' => ['class' => 'form-group col-sm-3']]) -> widget(DatePicker::classname(), 
+        [
+            'language' => 'es',
+            'removeButton' => false,
+            'pluginOptions' => [
+                'todayHighlight' => true,
+                'autoclose' => true, 
+                'format' => 'yyyy-mm-dd']
+        ]); 
+    ?>  
+
+    <?php
+        echo $form->field($model, 'cur_fechafinal', ['options' => ['class' => 'form-group col-sm-3']]) -> widget(DatePicker::classname(), 
+        [
+            'language' => 'es',
+            'removeButton' => false,
+            'pluginOptions' => [
+                'todayHighlight' => true,
+                'autoclose' => true, 
+                'format' => 'yyyy-mm-dd']
+        ]); 
+    ?>
+
+    <?= $form->field($model, 'cur_duracion', ['options' => ['class' => 'form-group col-sm-2']])->textInput() ?>
+
+    <?= $form->field($model, 'cur_cupo', ['options' => ['class' => 'form-group col-sm-2']])->textInput() ?>
+    
+    <?= $form->field($model, 'cur_costo', ['options' => ['class' => 'form-group col-sm-2']])->textInput() ?>
+
+</div>
+
+    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6]) ?>
+
+   
+    <?php
+        echo $form->field($model, 'cur_formaPago')->widget(MultipleInput::className(), [
+            'enableError' => true,
+            'addButtonPosition' => MultipleInput::POS_HEADER, 
+            'sortable'  => true,
+            'sortable'  => true, // show add button in the header
+            'allowEmptyList'  => true,
+        ]);
+    ?>
+
     <?php
         echo $form->field($model, 'cur_dirigido')->widget(MultipleInput::className(), [
             'enableError' => true,
@@ -26,12 +74,6 @@ use app\models\CurInstructor;
             'allowEmptyList'  => true,
         ]);
     ?>
-
-    <?= $form->field($model, 'cur_cupo')->textInput() ?>
-
-    <?= $form->field($model, 'cur_fechainicio')->textInput() ?>
-
-    <?= $form->field($model, 'cur_fechafinal')->textInput() ?>
 
     <?= $form->field($model, 'cur_presentacion')->textarea(['rows' => 6]) ?>
 
@@ -49,22 +91,6 @@ use app\models\CurInstructor;
 
     <?php
         echo $form->field($model, 'cur_requerimientos')->widget(MultipleInput::className(), [
-            'enableError' => true,
-            'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
-            'sortable'  => true, // show add button in the header
-            'allowEmptyList'  => true,
-        ]);
-    ?>
-
-    <?= $form->field($model, 'cur_duracion')->textInput() ?>
-
-    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'cur_costo')->textInput() ?>
-   
-    <?php
-        echo $form->field($model, 'cur_formaPago')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
             'sortable'  => true,

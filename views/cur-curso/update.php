@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\CurCurso */
 
-$this->title = 'Actualizar Curso: ' . $model->cur_id;
+$this->title = 'Actualizar Curso';
 $this->params['breadcrumbs'][] = ['label' => 'Cursos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->cur_id, 'url' => ['view', 'id' => $model->cur_id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -19,3 +19,6 @@ $this->params['breadcrumbs'][] = 'Update';
     ]) ?>
 
 </div>
+
+
+<?= $this->registerCssFile("/css/cur-form.css");   ?>
