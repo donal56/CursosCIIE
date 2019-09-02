@@ -5,7 +5,6 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use unclead\multipleinput\MultipleInput;
 use dosamigos\ckeditor\CKEditor;
-use dosamigos\ckeditor\CKEditorInline;
 use app\models\CurInstructor;
 
 /* @var $this yii\web\View */
@@ -87,11 +86,10 @@ use app\models\CurInstructor;
     <?= $form->field($model, 'cur_fkins_id')->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),
                                                                             'ins_id','ins_fullname')) ?>
 
+ 
     <?= $form->field($model, 'cur_temario')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
-        'preset' => 'basic',
     ]) ?>
-
 
     <?php
         echo $form->field($model, 'cur_procedimiento')->widget(MultipleInput::className(), 
@@ -115,7 +113,9 @@ use app\models\CurInstructor;
 
     <?= $form->field($model, 'cur_contacto')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'cur_observaciones')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'cur_observaciones')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+    ]) ?>
 
     <?= $form->field($model, 'cur_archivo')->textInput(['maxlength' => true]) ?>
 
@@ -126,3 +126,5 @@ use app\models\CurInstructor;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+<?= $this->registerJsFile('/assets/ckeditor/ckeditor.js'); ?>
