@@ -87,10 +87,13 @@ use app\models\CurInstructor;
     <?= $form->field($model, 'cur_fkins_id')->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),
                                                                             'ins_id','ins_fullname')) ?>
 
-    <?= $form->field($model, 'cur_temario')->widget(CKEditor::className(), [
-        'options' => ['rows' => 6],
-        'preset' => 'basic'
-    ]) ?>
+    <?php 
+        echo $form->field($model, 'cur_temario')->widget(CKEditor::className(), 
+        [
+            'options' => ['rows' => 6],
+            'preset' => 'basic'
+        ]) 
+    ?>
 
 
     <?php
