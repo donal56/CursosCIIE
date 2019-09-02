@@ -16,8 +16,10 @@ use Yii;
  *
  * @property CurCurso[] $curCursos
  */
+
 class CurInstructor extends \yii\db\ActiveRecord
 {
+    public $ins_fullname = "";
     /**
      * @inheritdoc
      */
@@ -60,5 +62,14 @@ class CurInstructor extends \yii\db\ActiveRecord
     public function getCurCursos()
     {
         return $this->hasMany(CurCurso::className(), ['cur_fkins_id' => 'ins_id']);
+    }
+
+    public function afterFind() {
+        parent::afterFind();
+        $this->ins_fullname =   $this->ins_titulo ." ".
+                            $this->ins_nombre ." ".
+                            $this->ins_paterno." ".
+                            $this->ins_materno;
+                   
     }
 }
