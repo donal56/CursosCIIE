@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use unclead\multipleinput\MultipleInput;
 use kartik\date\DatePicker;
 use dosamigos\ckeditor\CKEditor;
+use iutbay\yii2kcfinder\KCFinderInputWidget;
 use app\models\CurInstructor;
 
 /* @var $this yii\web\View */
@@ -143,7 +144,11 @@ use app\models\CurInstructor;
         'options' => ['rows' => 6],
     ])->label('En caso de necesitar agregar informacion extra, puede agregarlo en el siguiente espacio:') ?>
 
-    <?= $form->field($model, 'cur_archivo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cur_archivo')->widget(KCFinderInputWidget::className(), [
+    'multiple' => true,
+    'buttonLabel' =>'Subir Archivo',
+    ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
