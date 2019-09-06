@@ -13,7 +13,7 @@ use app\models\CurInstructor;
 /* @var $model app\models\CurCurso */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<br>
 <div class="cur-curso-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -54,14 +54,13 @@ use app\models\CurInstructor;
 
 </div>
 
-    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6, 'placeholder' => 'En este apartado puedes agregar la fecha y número de sesiones y el horario de ellas.']) ?>
 
    
     <?php
         echo $form->field($model, 'cur_formaPago')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
         ]);
@@ -94,7 +93,6 @@ use app\models\CurInstructor;
         echo $form->field($model, 'cur_requerimientos')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
         ]);
@@ -104,15 +102,17 @@ use app\models\CurInstructor;
         echo $form->field($model, 'cur_obtendra')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
         ]);
     ?>
 
-    <?= $form->field($model, 'cur_fkins_id')->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),
-                                                                            'ins_id','ins_fullname')) ?>
 
+    <?php $button= Html::a('', '', ['class' => 'btn btn-success glyphicon glyphicon-plus', 
+                 'style' => 'margin-bottom: 6px']); ?>
+    <?= $form->field($model, 'cur_fkins_id', [  'parts' => ['{button}' => $button],
+                                                'template' => '{label}<br>{input}{button}<br>{hint}{error}<br>'])
+        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>             
  
     <?= $form->field($model, 'cur_temario')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
@@ -123,7 +123,6 @@ use app\models\CurInstructor;
         [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
             'columns' => 
