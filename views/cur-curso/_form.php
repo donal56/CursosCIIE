@@ -182,7 +182,7 @@ use yii\helpers\Url;
     ])->label('En caso de necesitar agregar informacion extra, puede agregarlo en el siguiente espacio:') ?>
 
     <?= $form->field($model, 'cur_archivo')->widget(KCFinderInputWidget::className(), [
-        'multiple' => true,
+        'multiple' => false,
         'buttonLabel' =>'Subir Archivo',
         'modalTitle' =>'Descargas',
     ]);
