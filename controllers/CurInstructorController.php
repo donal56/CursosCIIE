@@ -8,6 +8,9 @@ use app\models\CurInstructorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+
 
 /**
  * CurInstructorController implements the CRUD actions for CurInstructor model.
@@ -47,7 +50,7 @@ class CurInstructorController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -69,17 +72,30 @@ class CurInstructorController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($submit = false)
     {
         $model = new CurInstructor();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ins_id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && $submit == false) {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
         }
+     
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) 
+            {
+                $model->refresh();
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                $this->redirect(["cur-curso/create"]);
+            } else {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
+        }
+     
+        return $this->renderAjax('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

@@ -7,7 +7,10 @@ use unclead\multipleinput\MultipleInput;
 use kartik\date\DatePicker;
 use dosamigos\ckeditor\CKEditor;
 use iutbay\yii2kcfinder\KCFinderInputWidget;
+use iutbay\yii2kcfinder\KCFinder;
 use app\models\CurInstructor;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CurCurso */
@@ -108,12 +111,33 @@ use app\models\CurInstructor;
     ?>
 
 
-    <?php $button= Html::a('', '', ['class' => 'btn btn-success glyphicon glyphicon-plus', 
-                 'style' => 'margin-bottom: 6px']); ?>
+    <?php $button= Html::a('', '#', [
+								'id' => 'activity-index-link',
+								'class' => 'btn btn-success glyphicon glyphicon-plus',
+								'style' => 'margin-bottom: 6px',
+								'data-toggle' => 'modal',
+								'data-target' => '#modal',
+								'data-url' => Url::to(['cur-instructor/create']),
+								'data-pjax' => '0',
+							]); ?>
     <?= $form->field($model, 'cur_fkins_id', [  'parts' => ['{button}' => $button],
                                                 'template' => '{label}<br>{input}{button}<br>{hint}{error}<br>'])
-        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>             
+        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>        
+
+
  
+    <?php
+    Modal::begin([
+        'id' => 'modal',
+        'header' => '<h4 class="modal-title">Complete</h4>',
+        'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
+    ]);
+ 
+    echo "<div class='well'></div>";
+ 
+    Modal::end();
+    ?>
+
     <?= $form->field($model, 'cur_temario')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
     ]) ?>
@@ -141,11 +165,13 @@ use app\models\CurInstructor;
 
     <?= $form->field($model, 'cur_observaciones')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
+        'kcfinder' => true,
     ])->label('En caso de necesitar agregar informacion extra, puede agregarlo en el siguiente espacio:') ?>
 
     <?= $form->field($model, 'cur_archivo')->widget(KCFinderInputWidget::className(), [
-    'multiple' => true,
-    'buttonLabel' =>'Subir Archivo',
+        'multiple' => true,
+        'buttonLabel' =>'Subir Archivo',
+        'modalTitle' =>'Descargas',
     ]);
     ?>
 
@@ -158,3 +184,15 @@ use app\models\CurInstructor;
 </div>
 
 <?= $this->registerJsFile('/assets/ckeditor/ckeditor.js'); ?>
+<?php
+$this->registerJs(
+	"$(document).on('click', '#activity-index-link', (function() {
+		$.get(
+			$(this).data('url'),
+			function (data) {
+				$('.modal-body').html(data);
+				$('#modal').modal();
+			}
+		);
+	}));"
+); ?>
