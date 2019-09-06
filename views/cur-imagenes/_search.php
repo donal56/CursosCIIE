@@ -19,8 +19,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ima_url') ?>
 
-    <?= $form->field($model, 'ima_activo') ?>
-
     <?= $form->field($model, 'ima_fkcurso') ?>
 
     <div class="form-group">

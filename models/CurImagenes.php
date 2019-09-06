@@ -30,8 +30,8 @@ class CurImagenes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ima_url', 'ima_activo', 'ima_fkcurso'], 'required'],
-            [['ima_activo', 'ima_fkcurso'], 'integer'],
+            [['ima_url', 'ima_fkcurso'], 'required'],
+            [['ima_fkcurso'], 'integer'],
             [['ima_url'], 'string', 'max' => 100],
             [['ima_fkcurso'], 'exist', 'skipOnError' => true, 'targetClass' => CurCurso::className(), 'targetAttribute' => ['ima_fkcurso' => 'cur_id']],
         ];
@@ -45,7 +45,6 @@ class CurImagenes extends \yii\db\ActiveRecord
         return [
             'ima_id' => 'ID',
             'ima_url' => 'Url',
-            'ima_activo' => 'Activo',
             'ima_fkcurso' => 'Curso',
         ];
     }

@@ -20,18 +20,26 @@ $this->title = 'Inscritos';
    
     <div class="wraper-ins">
         <!-- pager_nav -->
-        <h2 align="center">
-            <div align="center">
-                <h3>Inscritos:
-                    <font size="6" style="color: #679C67;"> <?= $model->getCountInsctritos(); ?></font> participantes.
-                </h3> 
-                <br>
-             </div>
-        </h2>
-    
+
         <div class="wraper">
 
-            <div class="content_avatars">
+            <div class="content_avatars" style="text-align: center !important">
+            	<table class= 'table table-bordered ' style="text-align: center !important;">
+		            <tr>
+		                <td><b>Inscritos:</b></td>
+		                <td><b>Interesados:</b></td>
+		                <td><b>Restantes:</b></td>
+		           
+		            </tr>
+
+		            <tr>
+		        
+		                <td><font size="6em" style="color: #679C67;"> <?= $model->getCountInsctritos(); ?></font></td>
+		                <td><font size="6em" style="color: #679C67;"> <?= $model->getCupoReservados(); ?></font></td>
+		                <td><font size="6em" style="color: #679C67;"> <?= $model->getCupoRestante(); ?></font></td>
+		            </tr>
+	        	</table>
+
 
                 <?php 
                     foreach ($model->getInscritos() as $participante) {
@@ -44,19 +52,7 @@ $this->title = 'Inscritos';
         </div>
 
         <h2 align="center">
-            <div align="center">
-                <h3>Cupo Restante: 
-                    <font size="6" style="color: #679C67;"> <?= $model->getCupoRestante(); ?></font> participantes.
-                </h3> 
-                <br>
-                <?php if (!Yii::$app->user->isGuest) {  ?>
-                <h3>Reservados: 
-                    <font size="6" style="color: #679C67;"> <?= $model->getCupoReservados(); ?></font> participantes.
-                </h3>
-                <?php }  ?>
-                
-
-             </div>
+        
             <?php 
                 if (Yii::$app->user->isGuest) { 
                     echo Html::a(CurCurso::getCurso()->getCupoRestante()>0 ?'Reservar':'Cupo Lleno',
@@ -75,4 +71,7 @@ $this->title = 'Inscritos';
        
 </div>
 
-<?= $this->registerCssFile("/css/cur-form.css");   ?>
+<?php 
+    $this->registerCssFile("/css/cur-form.css");  
+    $this->registerCssFile("/css/cursos.css");
+ ?>

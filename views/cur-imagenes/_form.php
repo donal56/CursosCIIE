@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ima_url')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'ima_activo')->textInput() ?>
-
     <?= $form->field($model, 'ima_fkcurso')->textInput() ?>
 
     <div class="form-group">

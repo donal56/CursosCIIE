@@ -6,15 +6,18 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\CurParticipante */
 
-$this->title = $model->par_id;
+$this->title = $model->getNombre();
 $this->params['breadcrumbs'][] = ['label' => 'Participantes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cur-participante-view">
 
+    <br>
     <h1><?= Html::encode($this->title) ?></h1>
+    <br>
 
     <p>
+        <?= Html::a('', ['index'], ['class' => 'btn btn-success glyphicon glyphicon-arrow-left']) ?>
         <?= Html::a('Actualizar', ['update', 'id' => $model->par_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->par_id], [
             'class' => 'btn btn-danger',
@@ -23,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </p><br>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -44,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'par_edad',
             'par_procedencia',
             'par_pagado',
+            'par_enteraste:ntext',
             'par_observaciones:ntext',
             'par_fkcurso',
         ],

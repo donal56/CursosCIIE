@@ -1,0 +1,153 @@
+	@media (max-width: 600px)
+    {
+    	.wraper
+        {
+    		width:95% !important;
+    	}
+        .myContainer
+	    {
+	     
+	        width: 100% !important;
+	       
+	    }
+
+	    .myContainer2
+	    {
+	     
+	        width: 100% !important;
+	    
+	    }
+    }
+    @font-face 
+    {
+        font-family: SoberanaSans-Regular;
+        src: url('/fonts/SoberanaSans-Regular.otf') format('opentype');
+        font-weight: normal;
+    }
+
+    html
+    {
+        font-family: SoberanaSans-Regular;
+        font: bold 4vmin 'SoberanaSans';
+    }
+
+    .encabezado
+    {
+        margin: 10px 0;
+        font-family: inherit;
+        font-weight: bold;
+        line-height: 20px;
+        text-rendering: optimizelegibility;
+        line-height: 40px;
+        color: #626363 !important;
+    }
+
+    li.lista::before, .myContainer li::before
+    {
+        font-weight: bold;
+        content: url('/img/bullet.png');
+        padding-right: 0.8em;
+        position: relative;
+        top: 20px;
+        display: table;
+        right: 25px;
+    }    
+    
+    ul.lista, li.lista, .myContainer li, .myContainer ul
+    {
+        padding: 4px 20px 4px 20px;
+    }
+    
+    .myContainer
+    {
+        padding-bottom: 2em;
+        width: 80%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .myContainer2
+    {
+        padding-bottom: 2em;
+        width: 80%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    
+    .myContainer p
+    {
+        line-height: 1.3em;
+    }
+    
+    .top_title h2
+    {
+        font: bold 4vmin 'SoberanaSans';
+    }
+    
+    .glyph-top-bar
+    {
+        color: #ffffff;
+        font-size: 20px;
+        margin: 10px 0;
+        line-height: 40px;
+    }
+    
+    .gray
+    {
+        color: #626363 !important;
+    }
+
+    .share_story ul li a.whatsapp 
+    {
+        background-position: -336px 1px;
+    }
+    
+    .share_story span.share_bg
+    {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 300px;
+        height: 89px;
+        padding: 0px;
+        background: url('/img/share_bg.png') no-repeat;
+    }
+    
+    .share_story ul li
+    {
+        padding-right: 5em !important;   
+    }
+    
+    .share_story ul 
+    {
+        left: 21em !important;
+        top: 0px !important;
+    }
+    
+    @media only screen and (max-width: 800px)
+    {
+        .share_story ul 
+        {
+            left: -2em !important;
+            top: 0px !important;
+        }
+
+        .share_story ul li 
+        {
+            padding-right: 3em !important;
+        }
+    }
+    
+    a.glyphicon:hover
+    {
+        color: #bff;   
+    }
+    
+    .share_story ul li a.whatsapp:hover 
+    {
+        background-position: -333px -46px;
+    }

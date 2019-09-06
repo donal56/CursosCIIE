@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'ima_id',
             'ima_url:url',
-            'ima_activo',
             'ima_fkcurso',
         ],
     ]) ?>

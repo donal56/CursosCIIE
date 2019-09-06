@@ -18,7 +18,7 @@ class CurImagenesSearch extends CurImagenes
     public function rules()
     {
         return [
-            [['ima_id', 'ima_activo', 'ima_fkcurso'], 'integer'],
+            [['ima_id', 'ima_fkcurso'], 'integer'],
             [['ima_url'], 'safe'],
         ];
     }
@@ -60,7 +60,6 @@ class CurImagenesSearch extends CurImagenes
         // grid filtering conditions
         $query->andFilterWhere([
             'ima_id' => $this->ima_id,
-            'ima_activo' => $this->ima_activo,
             'ima_fkcurso' => $this->ima_fkcurso,
         ]);
 

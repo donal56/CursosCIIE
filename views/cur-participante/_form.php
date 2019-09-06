@@ -41,6 +41,10 @@ use app\models\CurCurso;
 </div>
 
 <div class="row">
+    <?= $form->field($model, 'par_enteraste',['options' => ['class' => 'form-group col-sm-12']])->textarea(['rows' => 2]) ?>  
+</div>
+
+<div class="row">
     <?php echo (!Yii::$app->user->isGuest ? $form->field($model, 'par_observaciones',['options' => ['class' => 'form-group col-sm-12']])->textarea(['rows' => 2]) : '') ?>  
 </div>
 
@@ -48,6 +52,7 @@ use app\models\CurCurso;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::a('Regresar', Yii::$app->request->referrer ?: Yii::$app->homeUrl, ['class' => 'btn btn-danger']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
