@@ -8,6 +8,8 @@ use kartik\date\DatePicker;
 use dosamigos\ckeditor\CKEditor;
 use iutbay\yii2kcfinder\KCFinderInputWidget;
 use app\models\CurInstructor;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CurCurso */
@@ -113,7 +115,40 @@ use app\models\CurInstructor;
     <?= $form->field($model, 'cur_fkins_id')->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),
                                                                             'ins_id','ins_fullname')) ?>
 
+       <?= Html::a('Crear Instructor', '#', [
+            'id' => 'activity-index-link',
+            'class' => 'btn btn-success',
+            'data-toggle' => 'modal',
+            'data-target' => '#modal',
+            'data-url' => Url::to(['cur-instructor/create']),
+            'data-pjax' => '0',
+        ]); ?>
+
+    <?php
+    $this->registerJs(
+        "$(document).on('click', '#activity-index-link', (function() {
+            $.get(
+                $(this).data('url'),
+                function (data) {
+                    $('.modal-body').html(data);
+                    $('#modal').modal();
+                }
+            );
+        }));"
+    ); ?>
  
+    <?php
+    Modal::begin([
+        'id' => 'modal',
+        'header' => '<h4 class="modal-title">Complete</h4>',
+        'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
+    ]);
+ 
+    echo "<div class='well'></div>";
+ 
+    Modal::end();
+    ?>
+
     <?= $form->field($model, 'cur_temario')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
     ]) ?>
