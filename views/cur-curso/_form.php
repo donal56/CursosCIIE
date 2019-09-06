@@ -11,6 +11,7 @@ use iutbay\yii2kcfinder\KCFinder;
 use app\models\CurInstructor;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CurCurso */
@@ -111,7 +112,7 @@ use yii\helpers\Url;
     ?>
 
 
-    <?php $button= Html::a('', '#', [
+    <?php $button= Html::a('', '#Instructor', [
 								'id' => 'activity-index-link',
 								'class' => 'btn btn-success glyphicon glyphicon-plus',
 								'style' => 'margin-bottom: 6px',
@@ -120,22 +121,22 @@ use yii\helpers\Url;
 								'data-url' => Url::to(['cur-instructor/create']),
 								'data-pjax' => '0',
 							]); ?>
+
+    <?php Pjax::begin(['id' => 'instructor']) ?> 
     <?= $form->field($model, 'cur_fkins_id', [  'parts' => ['{button}' => $button],
                                                 'template' => '{label}<br>{input}{button}<br>{hint}{error}<br>'])
         ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>        
+    <?php Pjax::end() ?>
 
-
  
-    <?php
-    Modal::begin([
-        'id' => 'modal',
-        'header' => '<h4 class="modal-title">Complete</h4>',
-        'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
-    ]);
- 
-    echo "<div class='well'></div>";
- 
-    Modal::end();
+    <?php Pjax::begin(['id' => 'agregarInstructor']);
+            Modal::begin([
+                'id' => 'modal',
+                'header' => '<h4 class="modal-title">Rellene</h4>',
+                'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',]);
+                echo "<div class='well'></div>";
+            Modal::end();
+        Pjax::end();
     ?>
 
     <?= $form->field($model, 'cur_temario')->widget(CKEditor::className(), [

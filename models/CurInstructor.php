@@ -48,11 +48,11 @@ class CurInstructor extends \yii\db\ActiveRecord
     {
         return [
             'ins_id' => 'ID',
-            'ins_titulo' => 'Titulo',
+            'ins_titulo' => 'Titulo académico',
             'ins_nombre' => 'Nombre',
             'ins_paterno' => 'Apellido Paterno',
             'ins_materno' => 'Apellido Materno',
-            'ins_descripcion' => 'Descripcion',
+            'ins_descripcion' => 'Descripción',
         ];
     }
 
