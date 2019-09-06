@@ -16,7 +16,7 @@ use yii\helpers\Url;
 /* @var $model app\models\CurCurso */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<br>
 <div class="cur-curso-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -57,14 +57,13 @@ use yii\helpers\Url;
 
 </div>
 
-    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6, 'placeholder' => 'En este apartado puedes agregar la fecha y número de sesiones y el horario de ellas.']) ?>
 
    
     <?php
         echo $form->field($model, 'cur_formaPago')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
         ]);
@@ -97,7 +96,6 @@ use yii\helpers\Url;
         echo $form->field($model, 'cur_requerimientos')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
         ]);
@@ -107,36 +105,26 @@ use yii\helpers\Url;
         echo $form->field($model, 'cur_obtendra')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
         ]);
     ?>
 
-    <?= $form->field($model, 'cur_fkins_id')->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),
-                                                                            'ins_id','ins_fullname')) ?>
 
-       <?= Html::a('Crear Instructor', '#', [
-            'id' => 'activity-index-link',
-            'class' => 'btn btn-success',
-            'data-toggle' => 'modal',
-            'data-target' => '#modal',
-            'data-url' => Url::to(['cur-instructor/create']),
-            'data-pjax' => '0',
-        ]); ?>
+    <?php $button= Html::a('', '#', [
+								'id' => 'activity-index-link',
+								'class' => 'btn btn-success glyphicon glyphicon-plus',
+								'style' => 'margin-bottom: 6px',
+								'data-toggle' => 'modal',
+								'data-target' => '#modal',
+								'data-url' => Url::to(['cur-instructor/create']),
+								'data-pjax' => '0',
+							]); ?>
+    <?= $form->field($model, 'cur_fkins_id', [  'parts' => ['{button}' => $button],
+                                                'template' => '{label}<br>{input}{button}<br>{hint}{error}<br>'])
+        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>        
 
-    <?php
-    $this->registerJs(
-        "$(document).on('click', '#activity-index-link', (function() {
-            $.get(
-                $(this).data('url'),
-                function (data) {
-                    $('.modal-body').html(data);
-                    $('#modal').modal();
-                }
-            );
-        }));"
-    ); ?>
+
  
     <?php
     Modal::begin([
@@ -159,7 +147,6 @@ use yii\helpers\Url;
         [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true,
             'sortable'  => true, // show add button in the header
             'allowEmptyList'  => true,
             'columns' => 
@@ -197,3 +184,15 @@ use yii\helpers\Url;
 </div>
 
 <?= $this->registerJsFile('/assets/ckeditor/ckeditor.js'); ?>
+<?php
+$this->registerJs(
+	"$(document).on('click', '#activity-index-link', (function() {
+		$.get(
+			$(this).data('url'),
+			function (data) {
+				$('.modal-body').html(data);
+				$('#modal').modal();
+			}
+		);
+	}));"
+); ?>
