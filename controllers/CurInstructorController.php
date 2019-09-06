@@ -73,9 +73,24 @@ class CurInstructorController extends Controller
     {
         $model = new CurInstructor();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ins_id]);
-        } else {
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            if (Yii::$app->request->isAjax) 
+            {
+                return $this->refresh();
+            }
+            else 
+            {
+                return $this->redirect(['view', 'id' => $model->ins_id]);
+            }  
+        }
+        elseif (Yii::$app->request->isAjax) 
+        {
+            return $this->renderAjax('create', [
+                        'model' => $model
+            ]);
+        } 
+        else {
             return $this->render('create', [
                 'model' => $model,
             ]);

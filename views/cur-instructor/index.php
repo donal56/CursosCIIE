@@ -17,44 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <!-- <?= Html::a('Registrar Instructor', ['create'], ['class' => 'btn btn-success']) ?> -->
-    </p>
-
-    <?= Html::a('Crear Instructor', '#', [
-            'id' => 'activity-index-link',
-            'class' => 'btn btn-success',
-            'data-toggle' => 'modal',
-            'data-target' => '#modal',
-            'data-url' => Url::to(['create']),
-            'data-pjax' => '0',
-        ]); ?>
-
-    <?php
-    $this->registerJs(
-        "$(document).on('click', '#activity-index-link', (function() {
-            $.get(
-                $(this).data('url'),
-                function (data) {
-                    $('.modal-body').html(data);
-                    $('#modal').modal();
-                }
-            );
-        }));"
-    ); ?>
- 
-    <?php
-    Modal::begin([
-        'id' => 'modal',
-        'header' => '<h4 class="modal-title">Complete</h4>',
-        'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',
-    ]);
- 
-echo "<div class='well'></div>";
- 
-Modal::end();
-?>
-
 <?php Pjax::begin(); ?> 
  <?= GridView::widget([
         'dataProvider' => $dataProvider,
