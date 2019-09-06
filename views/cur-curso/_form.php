@@ -7,6 +7,7 @@ use unclead\multipleinput\MultipleInput;
 use kartik\date\DatePicker;
 use dosamigos\ckeditor\CKEditor;
 use iutbay\yii2kcfinder\KCFinderInputWidget;
+use iutbay\yii2kcfinder\KCFinder;
 use app\models\CurInstructor;
 
 /* @var $this yii\web\View */
@@ -142,11 +143,13 @@ use app\models\CurInstructor;
 
     <?= $form->field($model, 'cur_observaciones')->widget(CKEditor::className(), [
         'options' => ['rows' => 6],
+        'kcfinder' => true,
     ])->label('En caso de necesitar agregar informacion extra, puede agregarlo en el siguiente espacio:') ?>
 
     <?= $form->field($model, 'cur_archivo')->widget(KCFinderInputWidget::className(), [
-    'multiple' => true,
-    'buttonLabel' =>'Subir Archivo',
+        'multiple' => true,
+        'buttonLabel' =>'Subir Archivo',
+        'modalTitle' =>'Descargas',
     ]);
     ?>
 
