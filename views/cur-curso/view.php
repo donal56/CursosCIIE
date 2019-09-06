@@ -35,12 +35,25 @@
     </div>
   
     <div class= 'wraper' align= 'center'>
-        <br>
+    <br>
+
+            <b> Inscritos: <font size="4" style="color: #679C67;"> <?= $model->getCountInsctritos(); ?></font>,&nbsp;
+                Interesados: <font size="4" style="color: #679C67;"> <?= $model->getCupoReservados(); ?></font>,&nbsp;
+                Restantes: <font size="4" style="color: #679C67;"> <?= $model->getCupoRestante(); ?></font></b><br><br>
+
+
+        <div style="text-align: center;" class= 'myContainer'>
+            <?= Html::a('Ver Inscritos','/cur-curso/inscritos',['class' => 'btn btn-primary']); ?>
+            <?= Html::a('Reservar','/cur-participante/reservar',['class' => 'btn btn-success']); ?>
+        </div>
+
         <div class= "myContainer gray">
            <h2 class= 'encabezado'> El Instituto Tecnológico de Villahermosa y el Centro de Incubación e Innovación Empresarial</h2>
            <h4 class= 'encabezado'>Esta página ha sido visitada <font style="color: #679C67;" size="5"><?= Utilidades::contadorVisitas($model->cur_id, 'v') ?></font> veces.</h4>
         </div>
-
+        <div class= 'myContainer2' align= 'center'>
+         <p class="wp_img" align="center"><img src="/img/banners/cursojavaee2.png" alt="" width="100%"/></p><br>
+        </div>
         <div class= 'blog_entries-1 gray' align= 'left'>
         <br>
         <br>
@@ -142,7 +155,7 @@
             <?php if($model->getFormaPago()) { ?>
                 <div class= 'myContainer'>
                     <?= Html::tag('h4', 'Formas de pago', ['class' => 'encabezado']) ?>
-                    <ul class= 'lista'>    
+                    <ul style="font-size: 1.5em" class= 'lista'>    
                     <?php 
                         foreach($model->getFormaPago() as $elem)
                         {
@@ -207,7 +220,13 @@
                 </div>
             <?php } ?>
 
+               <div style="text-align: center;" class= 'myContainer'>
+                    <?= Html::a('Ver Inscritos','/cur-curso/inscritos',['class' => 'btn btn-primary']); ?>
+                    <?= Html::a('Reservar','/cur-participante/reservar',['class' => 'btn btn-success']); ?>
+                </div>
+
             <?php if($model->getContacto()) { ?>
+              
                 <div class= 'myContainer'>
                     <?= Html::tag('h4', 'Mayores Informes en:', ['class' => 'encabezado']) ?>
                     <p align= 'justify'><?php echo $model->getContacto(); ?></p>
@@ -257,138 +276,5 @@
 
 <?php
 
-$this->registerCss( 
-    "@font-face 
-    {
-        font-family: SoberanaSans-Regular;
-        src: url('/fonts/SoberanaSans-Regular.otf') format('opentype');
-        font-weight: normal;
-    }
-
-    html
-    {
-        font-family: SoberanaSans-Regular;
-        font: bold 4vmin 'SoberanaSans';
-    }
-
-    .encabezado
-    {
-        margin: 10px 0;
-        font-family: inherit;
-        font-weight: bold;
-        line-height: 20px;
-        text-rendering: optimizelegibility;
-        line-height: 40px;
-        color: #626363 !important;
-    }
-
-    li.lista::before, .myContainer li::before
-    {
-        font-weight: bold;
-        content: url('/img/bullet.png');
-        padding-right: 0.8em;
-        position: relative;
-        top: 20px;
-        display: table;
-        right: 25px;
-    }    
-    
-    ul.lista, li.lista, .myContainer li, .myContainer ul
-    {
-        padding: 4px 20px 4px 20px;
-    }
-    
-    .myContainer
-    {
-        padding-bottom: 2em;
-        width: 80%;
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .myContainer2
-    {
-        padding-bottom: 2em;
-        width: 80%;
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-    
-    .myContainer p
-    {
-        line-height: 1.3em;
-    }
-    
-    .top_title h2
-    {
-        font: bold 4vmin 'SoberanaSans';
-    }
-    
-    .glyph-top-bar
-    {
-        color: #ffffff;
-        font-size: 20px;
-        margin: 10px 0;
-        line-height: 40px;
-    }
-    
-    .gray
-    {
-        color: #626363 !important;
-    }
-
-    .share_story ul li a.whatsapp 
-    {
-        background-position: -336px 1px;
-    }
-    
-    .share_story span.share_bg
-    {
-        position: absolute;
-        top: 0px;
-        left: 0;
-        width: 300px;
-        height: 89px;
-        padding: 0px;
-        background: url('/img/share_bg.png') no-repeat;
-    }
-    
-    .share_story ul li
-    {
-        padding-right: 5em;   
-    }
-    
-    .share_story ul 
-    {
-        left: 21em;
-        top: 0px;
-    }
-    
-    @media only screen and (max-width: 800px)
-    {
-        .share_story ul 
-        {
-            left: -2em;
-            top: 0px;
-        }
-
-        .share_story ul li 
-        {
-            padding-right: 3em;
-        }
-    }
-    
-    a.glyphicon:hover
-    {
-        color: #bff;   
-    }
-    
-    .share_story ul li a.whatsapp:hover 
-    {
-        background-position: -333px -46px;
-    }");
+$this->registerCssFile("/css/cursos.css");
 ?>

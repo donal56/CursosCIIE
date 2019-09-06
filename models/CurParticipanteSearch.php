@@ -19,7 +19,7 @@ class CurParticipanteSearch extends CurParticipante
     {
         return [
             [['par_id', 'par_edad', 'par_fkcurso'], 'integer'],
-            [['par_nombre', 'par_paterno', 'par_materno', 'par_genero', 'par_telefono', 'par_email', 'par_procedencia', 'par_observaciones'], 'safe'],
+            [['par_nombre', 'par_paterno', 'par_materno', 'par_genero', 'par_telefono', 'par_email', 'par_procedencia', 'par_observaciones', 'par_enteraste'], 'safe'],
             [['par_pagado'], 'number'],
         ];
     }
@@ -73,6 +73,7 @@ class CurParticipanteSearch extends CurParticipante
             ->andFilterWhere(['like', 'par_telefono', $this->par_telefono])
             ->andFilterWhere(['like', 'par_email', $this->par_email])
             ->andFilterWhere(['like', 'par_procedencia', $this->par_procedencia])
+            ->andFilterWhere(['like', 'par_enteraste', $this->par_enteraste])
             ->andFilterWhere(['like', 'par_observaciones', $this->par_observaciones]);
 
         return $dataProvider;

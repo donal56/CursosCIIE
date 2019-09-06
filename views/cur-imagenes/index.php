@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'ima_id',
             'ima_url:url',
-            'ima_activo',
             'ima_fkcurso',
 
             ['class' => 'yii\grid\ActionColumn'],

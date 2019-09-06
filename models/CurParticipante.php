@@ -18,6 +18,7 @@ use yii\web\NotFoundHttpException;
  * @property integer $par_edad
  * @property string $par_procedencia
  * @property double $par_pagado
+ * @property string $par_enteraste
  * @property string $par_observaciones
  * @property integer $par_fkcurso
  *
@@ -45,7 +46,7 @@ class CurParticipante extends \yii\db\ActiveRecord
             ['par_pagado','compare', 'compareValue' => CurCurso::getCurso()->cur_costo, 'operator' => '<=','message'=>Yii::t('app','Se ha excedido el pago máximo.')],
             //para invitados no pueden pagar
             ['par_pagado','compare', 'compareValue' => '0', 'operator' => '<=','message'=>Yii::t('app','Acuda a la oficina correspondiente para registrar su pago'),'on' => 'unlogged'],
-            [['par_observaciones'], 'string'],
+            [['par_observaciones', 'par_enteraste'], 'string'],
             [['par_nombre', 'par_paterno', 'par_materno'], 'string', 'max' => 50],
             [['par_email'], 'string', 'max' => 100],
             [['par_email'], 'email'],
@@ -73,6 +74,7 @@ class CurParticipante extends \yii\db\ActiveRecord
             'par_procedencia' => 'Institución de Procedencia',
             'par_pagado' => 'Pagado',
             'par_observaciones' => 'Observaciones',
+            'par_enteraste' => '¿Cómo te enteraste del curso?',
             'par_fkcurso' => 'Curso',
         ];
     }
@@ -93,6 +95,12 @@ class CurParticipante extends \yii\db\ActiveRecord
     {
         return ($this->par_genero == "M" ? "Mujer" : "Hombre");
     }
+
+    public function getNombre()
+    {
+        return $this->par_nombre . " " . $this->par_paterno . " " . $this->par_materno;
+    }
+
      public function getCurso()
     {
         $model = CurCurso::findOne($this->par_fkcurso);
