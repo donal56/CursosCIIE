@@ -123,16 +123,16 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'cur_fkins_id', [  'parts' => ['{button}' => $button],
                                                 'template' => '{label}<br>{input}{button}<br>{hint}{error}<br>'])
-        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>        
+        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['id'=> 'dropdown', 'class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>        
 
 
     <?php
     Modal::begin([
         'id'     =>'modal',
-        'clientOptions' => ['backdrop' => 'static', 'keyboard' => FALSE],
+        'clientOptions' => ['backdrop' => 'static'],
         'header' => '<h4 class="modal-title">Rellene</h4>',
         'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',]);
-        echo "<div class='well'></div>";
+        echo "<div style='text-align:center'><img width= '100%' src='https://1.bp.blogspot.com/-yIhXlQfYN1E/WMksG192LLI/AAAAAAAAA9w/txsqdQfykVksDEFshayeN54c0Gu6C3AAwCLcB/s1600/glow.gif'></div>";
     Modal::end();
     ?>
 

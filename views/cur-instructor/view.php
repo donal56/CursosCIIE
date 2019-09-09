@@ -6,24 +6,25 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\CurInstructor */
 
-$this->title = $model->ins_id;
+$this->title = $model->ins_fullname;
 $this->params['breadcrumbs'][] = ['label' => 'Cur Instructors', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cur-instructor-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <br>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->ins_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->ins_id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->ins_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->ins_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => '¿Estas seguro de eliminar este elemento?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </p><br>
 
     <?= DetailView::widget([
         'model' => $model,

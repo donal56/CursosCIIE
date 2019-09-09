@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="cur-instructor-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => [ 'id' => 'create-instructor-form' ] ] ); ?>
 
     <?= $form->field($model, 'ins_titulo')->textInput(['maxlength' => true, ['class' => 'col-md-12']]) ?>
 

@@ -78,7 +78,12 @@ class CurCursoController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->preGuardar() && $model->save()) {
             return $this->redirect(['view', 'id' => $model->cur_id]);
-        } else {
+        } 
+        else if(Yii::$app->request->isAjax)
+        {
+            return $this->renderPartial();            
+        }
+        else {
             return $this->render('create', [
                 'model' => $model,
             ]);

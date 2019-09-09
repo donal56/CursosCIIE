@@ -75,14 +75,12 @@ class CurInstructorController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
-            if (Yii::$app->request->isAjax) 
-            {
-                return $this->refresh();
-            }
-            else 
-            {
-                return $this->redirect(['view', 'id' => $model->ins_id]);
-            }  
+            # \Yii::$app->response->format = Response::FORMAT_JSON;
+            # return['id'=>$id, 'someOtherData'=>true];
+            # return $this->$this->renderPartial('//cur-curso/create');
+            #  return $this->renderPartial('//cur-curso/create', ['data'=>'Welcome', 'model'=>$model]);
+           # $js= "$('#dropdown').append($('<option></option>').attr('value', '" . $model->ins_id  . "').text('" . #$model->ins_fullname ."'));";
+           #echo '<script>' . $js . '</script>';
         }
         elseif (Yii::$app->request->isAjax) 
         {
@@ -90,11 +88,11 @@ class CurInstructorController extends Controller
                         'model' => $model
             ]);
         } 
-        else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        // else {
+        //     return $this->render('create', [
+        //         'model' => $model,
+        //     ]);
+        // }
     }
 
     /**
