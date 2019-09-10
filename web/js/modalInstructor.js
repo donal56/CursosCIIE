@@ -11,11 +11,18 @@ $(document).on('click', '#abrirModal', (function()
     {
         $(document).on('click', '#createButton', (function() 
         {
-            //Se fuerza la validacion en el primer campo en caso de que el form este vacio
-            $('#create-instructor-form input').trigger('blur');
-            alert($('#modal').find('.has-error').length);
-            if ( $('#modal').find('.has-error').length != 0)
+            //Se fuerza la validacion en caso de que el form este vacio
+            var $form = $("#create-instructor-form"), 
+                data = $form.data("yiiActiveForm");
+            $.each(data.attributes, function() {
+                this.status = 3;
+            });
+            $form.yiiActiveForm("validate");
+
+         
+            if ($('#create-instructor-form').find('.has-error').length==0)
             {   
+                alert($('#modal').find('.has-error').length);
                 $.post( '/cur-instructor/ajax_create', $('#create-instructor-form').serialize())
                 .done( function(data)
                 {
