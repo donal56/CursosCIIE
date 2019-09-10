@@ -79,7 +79,7 @@ class CurCurso extends \yii\db\ActiveRecord
             'cur_objetivo' => 'Objetivo',
             'cur_requisitos' => 'Requisitos',
             'cur_requerimientos' => 'Requerimientos',
-            'cur_duracion' => 'Duración',
+            'cur_duracion' => 'Duración (Horas)',
             'cur_horario' => 'Horario',
             'cur_costo' => 'Costo',
             'cur_formaPago' => 'Forma de Pago',

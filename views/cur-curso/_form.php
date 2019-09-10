@@ -57,7 +57,7 @@ use yii\helpers\Url;
 
 </div>
 
-    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6, 'placeholder' => 'En este apartado puedes agregar la fecha y número de sesiones y el horario de ellas.']) ?>
+    <?= $form->field($model, 'cur_horario')->textarea(['rows' => 6, 'placeholder' => 'En este apartado puedes agregar la fecha y número de sesiones y el horario de ellas.']); ?>
 
    
     <?php
