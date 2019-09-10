@@ -112,21 +112,21 @@ use yii\helpers\Url;
 
 
     <?php $button= Html::a('', '#Instructor', [
-								'id' => 'activity-index-link',
+								'id' => 'abrirModal',
 								'class' => 'btn btn-success glyphicon glyphicon-plus',
 								'style' => 'margin-bottom: 6px',
 								'data-toggle' => 'modal',
 								'data-target' => '#modal',
-								'data-url' => Url::to(['cur-instructor/create']),
+								'data-url' => Url::to(['cur-instructor/ajax_create']),
 								'data-pjax' => '0',
 							]); ?>
 
     <?= $form->field($model, 'cur_fkins_id', [  'parts' => ['{button}' => $button],
                                                 'template' => '{label}<br>{input}{button}<br>{hint}{error}<br>'])
-        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['id'=> 'dropdown', 'class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>        
+        ->dropDownList(ArrayHelper::map(CurInstructor::find()->all(),'ins_id','ins_fullname'), ['id'=> 'dropdown_ins', 'class' => 'form-control', 'style' => 'width: calc(100% - 50px); margin-right: 5px; display: inline-block']) ?>        
 
 
-    <?php
+    <?php 
     Modal::begin([
         'id'     =>'modal',
         'clientOptions' => ['backdrop' => 'static'],
@@ -182,16 +182,5 @@ use yii\helpers\Url;
 
 </div>
 
-<?= $this->registerJsFile('/assets/ckeditor/ckeditor.js'); ?>
-<?php
-$this->registerJs(
-	"$(document).on('click', '#activity-index-link', (function() {
-		$.get(
-			$(this).data('url'),
-			function (data) {
-				$('.modal-body').html(data);
-				$('#modal').modal();
-			}
-		);
-	}));"
-); ?>
+<?= $this->registerJsFile('/assets/ckeditor/ckeditor.js');  ?>
+<?php $this->registerJsFile("/js/modalInstructor.js", ['depends' => 'yii\web\JqueryAsset']);    ?>

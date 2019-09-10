@@ -75,25 +75,35 @@ class CurInstructorController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save())
         {
-            # \Yii::$app->response->format = Response::FORMAT_JSON;
-            # return['id'=>$id, 'someOtherData'=>true];
-            # return $this->$this->renderPartial('//cur-curso/create');
-            #  return $this->renderPartial('//cur-curso/create', ['data'=>'Welcome', 'model'=>$model]);
-           # $js= "$('#dropdown').append($('<option></option>').attr('value', '" . $model->ins_id  . "').text('" . #$model->ins_fullname ."'));";
-           #echo '<script>' . $js . '</script>';
+            return $this->redirect(['view', 'id' => $model->ins_id]);
         }
-        elseif (Yii::$app->request->isAjax) 
+        else 
         {
-            return $this->renderAjax('create', [
-                        'model' => $model
-            ]);
-        } 
-        // else {
-        //     return $this->render('create', [
-        //         'model' => $model,
-        //     ]);
-        // }
+            return $this->render('create', ['model' => $model]);
+        }
     }
+
+    public function actionAjax_create()
+    {
+        $model = new CurInstructor();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save())
+        {
+            # Se invoca para obtener el nombre completo
+            $model->afterFind();
+
+            #Se cambia el tipo de respuesta y se envia el nombre e ID
+            \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['nombre' => $model->ins_fullname,
+                    'id' => $model->ins_id];
+        }
+        else 
+        {
+            return $this->renderAjax('create', ['model' => $model]);
+        }
+
+    }
+
 
     /**
      * Updates an existing CurInstructor model.
