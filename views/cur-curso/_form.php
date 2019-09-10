@@ -132,7 +132,7 @@ use yii\helpers\Url;
         'clientOptions' => ['backdrop' => 'static'],
         'header' => '<h4 class="modal-title">Rellene</h4>',
         'footer' => '<a href="#" class="btn btn-primary" data-dismiss="modal">Cerrar</a>',]);
-        echo "<div style='text-align:center'><img width= '100%' src='https://1.bp.blogspot.com/-yIhXlQfYN1E/WMksG192LLI/AAAAAAAAA9w/txsqdQfykVksDEFshayeN54c0Gu6C3AAwCLcB/s1600/glow.gif'></div>";
+        echo "<div style='text-align:center'><img width= '40%' src='/img/loading.gif'></div>";
     Modal::end();
     ?>
 
