@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'participantes' => function ($url, $model, $key) {
-                        return Html::a ( '<span class="glyphicon glyphicon-user"></span> ', ['cur-participante/index', 'id' => $model->cur_id],['data-pjax'=>"0"]);
+                        return Html::a ( '<span class="glyphicon glyphicon-user"></span> ', ['cur-participante/index', 'cid' => $model->cur_id],['data-pjax'=>"0"]);
 
                     },
                 ],

@@ -54,12 +54,15 @@ $this->title = 'Inscritos';
         <h2 align="center">
         
             <?php 
-                if (Yii::$app->user->isGuest) { 
+                if (Yii::$app->user->isGuest) 
+                { 
                     echo Html::a(CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0 ?'Reservar':'Cupo Lleno',
                                  CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0 ? '/cur-participante/reservar':'',
                     ['class' =>  CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0 ?'btn btn-primary':'btn btn-danger']); 
 
-                }else{
+                }
+                else
+                {
                     echo Html::a('Regresar','/',['class' => 'btn btn-primary']);
                 }
 

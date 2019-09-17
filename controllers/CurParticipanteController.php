@@ -38,15 +38,14 @@ class CurParticipanteController extends Controller
                      //si el cupo esta lleno se inhabilita acceder a la accion create y reservar
                     [
                         'actions' =>  ['create'],
-                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0),
+                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['cid']])->getCupoRestante()>0),
                         'roles' => ['@'],
                     ],
                     [
                        
                         'actions' =>  ['reservar'],
-                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0),
+                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['cid']])->getCupoRestante()>0),
                     ],
-                  
                     // everything else is denied
                 ],
             ],
@@ -57,9 +56,8 @@ class CurParticipanteController extends Controller
      * Lists all CurParticipante models.
      * @return mixed
      */
-    public function actionIndex($id)
+    public function actionIndex($cid)
     {
-        $idCurso = $id;
 
         $searchModel = new CurParticipanteSearch();
         $dataProvider = $searchModel->search($id);
@@ -67,7 +65,7 @@ class CurParticipanteController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'id' => $id
+            'cid' => $cid
         ]);
     }
 
@@ -79,7 +77,7 @@ class CurParticipanteController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id)
         ]);
     }
 
@@ -88,7 +86,7 @@ class CurParticipanteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate($cid)
     {
         $model = new CurParticipante();
         //si se va a reservar
@@ -101,12 +99,12 @@ class CurParticipanteController extends Controller
                     return $this->render('reserva');
                 }
                 
-                return $this->redirect(['view', 'id' => $model->par_id]);
+                return $this->redirect(['index', 'cid' => $_GET['cid'],]);
             
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'id' => $id
+                'cid' => $cid
             ]);
         }
     }
@@ -132,6 +130,7 @@ class CurParticipanteController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+
             ]);
         }
     }
@@ -146,7 +145,7 @@ class CurParticipanteController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect( Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 
     /**
