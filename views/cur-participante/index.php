@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php
-        if (CurCurso::getCurso()->getCupoRestante()>0) { 
+        if (CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0) { 
             echo Html::a('Registrar Participante', ['create'], ['class' => 'btn btn-success']);
         }else{
             echo Html::Button('Cupo Lleno' ,['class' => 'btn btn-danger']);

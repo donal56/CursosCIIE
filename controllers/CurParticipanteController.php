@@ -13,11 +13,13 @@ use app\models\CurCurso;
 /**
  * CurParticipanteController implements the CRUD actions for CurParticipante model.
  */
+
 class CurParticipanteController extends Controller
 {
     /**
      * @inheritdoc
      */
+    
     public function behaviors()
     {
         return [
@@ -36,13 +38,13 @@ class CurParticipanteController extends Controller
                      //si el cupo esta lleno se inhabilita acceder a la accion create y reservar
                     [
                         'actions' =>  ['create'],
-                        'allow' => (CurCurso::getCurso()->getCupoRestante()>0),
+                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0),
                         'roles' => ['@'],
                     ],
                     [
                        
                         'actions' =>  ['reservar'],
-                        'allow' => (CurCurso::getCurso()->getCupoRestante()>0),
+                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0),
                     ],
                   
                     // everything else is denied
@@ -55,14 +57,17 @@ class CurParticipanteController extends Controller
      * Lists all CurParticipante models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id)
     {
+        $idCurso = $id;
+
         $searchModel = new CurParticipanteSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search($id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'id' => $id
         ]);
     }
 
@@ -83,7 +88,7 @@ class CurParticipanteController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
         $model = new CurParticipante();
         //si se va a reservar
@@ -101,6 +106,7 @@ class CurParticipanteController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'id' => $id
             ]);
         }
     }
@@ -155,7 +161,7 @@ class CurParticipanteController extends Controller
         if (($model = CurParticipante::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('La página requerida no existe.');
         }
     }
 }

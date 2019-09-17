@@ -18,25 +18,32 @@ NavBar::begin([
     ],
 ]);
 
-$menuItems = [
-    ['label' => '<span class="glyphicon glyphicon-home"></span>', 'url' => ['/cur-curso/view']],
+$menuAdmin= [
+  ['label' =>  'Cursos', 'url' => ['/cur-curso/index']],
+  ['label' =>  'Instructores', 'url' => ['/cur-instructor/index']],
 ];
-if (Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
-//oculta reservar si el cupo esta lleno
-  if (CurCurso::getCurso()->getCupoRestante()>0) { 
-    $menuItems[] = ['label' => 'Reservar Lugar', 'url' => ['/cur-participante/reservar']];
-  }
+
+
+$menuItems = [
+    ['label' => '<span class="glyphicon glyphicon-home"></span>', 'url' => ['/']],
+];
+
+  if (Yii::$app->user->isGuest) {
+//     $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
+      //oculta reservar si el cupo esta lleno
+//   if (CurCurso::getCurso()->getCupoRestante()>0) { 
+//     $menuItems[] = ['label' => 'Reservar Lugar', 'url' => ['/cur-participante/reservar']];
+//   }
 
   $menuItems[] = ['label' => 'Iniciar Sesión', 'url' => ['/user-management/auth/login']];
 
-} else {
+ } else {
   
   //Agregar opciones de administrador
-  //if(Yii::$app->user->identity->hasRole('Admin')):
     $menuItems[] = ['label' => 'Administrador', 'items'=>UserManagementModule::menuItems()];
-    $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
-    $menuItems[] = ['label' => 'Gestionar Participantes', 'url' => ['/cur-participante/index']];
+    $menuItems[] = ['label' => 'Administrar cursos', 'items'=>$menuAdmin];
+    // $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
+    // $menuItems[] = ['label' => 'Gestionar Participantes', 'url' => ['/cur-participante/index']];
   //endif;
   $menuItems[] = [
   'label' => 'Cerrar Sesión (' . Yii::$app->user->identity->username . ')',

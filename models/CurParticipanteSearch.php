@@ -40,7 +40,7 @@ class CurParticipanteSearch extends CurParticipante
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($id)
     {
         $query = CurParticipante::find();
 
@@ -63,7 +63,7 @@ class CurParticipanteSearch extends CurParticipante
             'par_id' => $this->par_id,
             'par_edad' => $this->par_edad,
             'par_pagado' => $this->par_pagado,
-            'par_fkcurso' => $this->par_fkcurso,
+            'par_fkcurso' => $id,
         ]);
 
         $query->andFilterWhere(['like', 'par_nombre', $this->par_nombre])

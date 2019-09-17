@@ -59,9 +59,8 @@ class CurCursoController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView()
+    public function actionView($id)
     {
-        $id = CurCurso::getCurso()->cur_id;
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -118,9 +117,8 @@ class CurCursoController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionInscritos()
+    public function actionInscritos($id)
     {
-        $id = CurCurso::getCurso()->cur_id;
         return $this->render('inscritos', [
                'model' =>  $this->findModel($id),
         ]);
@@ -149,5 +147,10 @@ class CurCursoController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionMain()
+    {
+        return $this->render('main');
     }
 }

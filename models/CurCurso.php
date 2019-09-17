@@ -55,6 +55,8 @@ class CurCurso extends \yii\db\ActiveRecord
             [['cur_nombre'], 'required'],
             [['cur_dirigido', 'cur_presentacion', 'cur_objetivo', 'cur_requisitos', 'cur_requerimientos', 'cur_horario', 'cur_formaPago', 'cur_obtendra', 'cur_temario', 'cur_procedimiento', 'cur_contacto', 'cur_observaciones'],  'safe'],
             [['cur_cupo', 'cur_duracion', 'cur_fkins_id'], 'integer'],
+            //  ['cur_fechainicio','compare', 'compareValue' => 'cur_fechafinal', 'operator' => '<='],
+            // ['cur_fechafinal','compare', 'compareValue' => 'cur_fechainicio', 'operator' => '>='],
             [['cur_fechainicio', 'cur_fechafinal'], 'safe'],
             [['cur_costo'], 'number'],
             [['cur_nombre'], 'string', 'max' => 150],
@@ -149,7 +151,37 @@ class CurCurso extends \yii\db\ActiveRecord
     {
         return $this->clr($this->cur_dirigido);
     }
+
+    public function getFechaInicio()
+    {
+        // LC_ALL para todos los tipos
+        // Se establece date por si choca con alguna validación
+        setlocale(LC_TIME,"es_MX","esp");
+        $dateInicio= strtotime($this->cur_fechainicio);
+
+        if(strftime("%Y", $dateInicio) == (string)date('Y'))
+            $fecha = strftime("%e de %B", $dateInicio);
+        else
+            $fecha = strftime("%e de %B de %Y", $dateInicio);
+
+        return $fecha;
+    }
     
+    public function getFechaFinal()
+    {
+        // LC_ALL para todos los tipos
+        // Se establece date por si choca con alguna validación
+        setlocale(LC_TIME,"es_MX","esp");
+        $dateFinal= strtotime($this->cur_fechafinal);
+
+        if(strftime("%Y", $dateFinal) == (string)date('Y'))
+            $fecha = strftime("%e de %B", $dateFinal);
+        else
+            $fecha = strftime("%e de %B de %Y", $dateFinal);
+
+        return $fecha;
+    }
+
     public function getImagenes()
     {
         $modeloImagenes= $this->curImagenes;
@@ -293,13 +325,27 @@ class CurCurso extends \yii\db\ActiveRecord
         return $temp;
     }
 
-    public static function getCurso()
+    public static function getCursosActuales()
     {
-        if (($model = CurCurso::find()->one()) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
+        $cursos= null;
+        $cursos= CurCurso::find()->where(['<=', 'cur_fechainicio', date('Y-m-d')])->andWhere(['>=', 'cur_fechafinal', date('Y-m-d')])->all();
+        
+        return $cursos;
     }
 
+    public static function getCursosPasados()
+    {
+        $cursos= null;
+        $cursos= CurCurso::find()->where(['<', 'cur_fechafinal', date('Y-m-d')])->all();
+        
+        return $cursos;
+    }
+
+    public static function getCursosProximos()
+    {
+        $cursos= null;
+        $cursos= CurCurso::find()->where(['>', 'cur_fechainicio', date('Y-m-d')])->all();
+        
+        return $cursos;
+    }
 }

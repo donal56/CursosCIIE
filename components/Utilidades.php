@@ -339,4 +339,9 @@ class Utilidades
       $anio = strftime("%Y", strtotime($f));      
       return "{$diasemana} {$diames} de {$mes} de {$anio}";
    }
+
+   public static function truncateString(string $cad, int $limit)
+   {
+      return mb_substr($cad, 0, $limit)."...";
+   }
 }

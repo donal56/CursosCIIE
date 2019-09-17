@@ -78,7 +78,7 @@ use yii\helpers\Url;
         ]);
     ?>
 
-    <?= $form->field($model, 'cur_presentacion')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'cur_presentacion')->textarea(['rows' => 6, 'placeholder' => 'Este texto será el que se mostrara en la pantalla principal.']) ?>
 
     <?= $form->field($model, 'cur_objetivo')->textarea(['rows' => 6]) ?>
 

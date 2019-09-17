@@ -17,12 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
     <p>
-        <?= Html::a('', ['index'], ['class' => 'btn btn-success glyphicon glyphicon-arrow-left']) ?>
+        <?= Html::a('', ['index', ], ['class' => 'btn btn-success glyphicon glyphicon-arrow-left']) ?>
         <?= Html::a('Actualizar', ['update', 'id' => $model->par_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->par_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Estas seguro de eliminar este elemento?',
                 'method' => 'post',
             ],
         ]) ?>

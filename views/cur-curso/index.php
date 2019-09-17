@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     <br>
     <p>
-        <?= Html::a('Nuevo Curso', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Nuevo Curso', ['create', 'id' => $id], ['class' => 'btn btn-success']) ?>
     </p>
     <br>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
@@ -69,7 +69,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'cur_contacto:ntext',
             // 'cur_observaciones:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'participantes' => function ($url, $model, $key) {
+                        return Html::a ( '<span class="glyphicon glyphicon-user"></span> ', ['cur-participante/index', 'id' => $model->cur_id],['data-pjax'=>"0"]);
+
+                    },
+                ],
+                'template' => '{view} {update} {participantes} {delete}'
+            ]
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

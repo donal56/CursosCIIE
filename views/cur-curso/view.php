@@ -51,9 +51,6 @@
            <h2 class= 'encabezado'> El Instituto Tecnológico de Villahermosa y el Centro de Incubación e Innovación Empresarial</h2>
            <h4 class= 'encabezado'>Esta página ha sido visitada <font style="color: #679C67;" size="5"><?= Utilidades::contadorVisitas($model->cur_id, 'v') ?></font> veces.</h4>
         </div>
-        <div class= 'myContainer2' align= 'center'>
-         <p class="wp_img" align="center"><img src="/img/banners/cursojavaee2.png" alt="" width="100%"/></p><br>
-        </div>
         <div class= 'blog_entries-1 gray' align= 'left'>
         <br>
         <br>
@@ -85,6 +82,12 @@
                         }
                         echo Carousel::widget(['showIndicators' => true, 'items' => $arr]);
                     ?>    
+                </div>
+            <?php } ?>
+
+            <?php if($model->getFechaInicio() && $model->getFechaFinal()) { ?>
+                <div class= 'myContainer2' align= 'center'>
+                    <h3><b>Del <font style="color: #679C67;"><?= $model->getFechaInicio() ?></font> al <font style="color: #679C67;"><?= $model->getFechaFinal() ?></font></b></h3>   
                 </div>
             <?php } ?>
 
@@ -221,6 +224,9 @@
             <?php } ?>
 
                <div style="text-align: center;" class= 'myContainer'>
+                <b> Inscritos: <font size="4" style="color: #679C67;"> <?= $model->getCountInsctritos(); ?></font>,&nbsp;
+                    Interesados: <font size="4" style="color: #679C67;"> <?= $model->getCupoReservados(); ?></font>,&nbsp;
+                    Restantes: <font size="4" style="color: #679C67;"> <?= $model->getCupoRestante(); ?></font></b><br><br>
                     <?= Html::a('Ver Inscritos','/cur-curso/inscritos',['class' => 'btn btn-primary']); ?>
                     <?= Html::a('Reservar','/cur-participante/reservar',['class' => 'btn btn-success']); ?>
                 </div>
