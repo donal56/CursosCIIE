@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\CurCurso;
+use app\models\CurImagenes;
 use app\models\CurCursoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -74,6 +75,7 @@ class CurCursoController extends Controller
     public function actionCreate()
     {
         $model = new CurCurso();
+        $modelimg = new CurImagenes();
 
         if ($model->load(Yii::$app->request->post()) && $model->preGuardar() && $model->save()) 
         {
@@ -81,7 +83,10 @@ class CurCursoController extends Controller
         }
         else 
         {
-            return $this->render('create', ['model' => $model]);
+            return $this->render('create', [
+                'model' => $model,
+                'modelimg' => $modelimg,
+            ]);
         }
     }
 
@@ -94,12 +99,14 @@ class CurCursoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modelimg = $this->findModelimg($id);
 
         if ($model->load(Yii::$app->request->post())  && $model->preGuardar()  && $model->save()) {
             return $this->redirect(['view', 'id' => $model->cur_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modelimg' => $modelimg,
             ]);
         }
     }
@@ -143,6 +150,15 @@ class CurCursoController extends Controller
     protected function findModel($id)
     {
         if (($model = CurCurso::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findModelimg($id)
+    {
+        if (($model = CurImagenes::findOne(['ima_fkcurso' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

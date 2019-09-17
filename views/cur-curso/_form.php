@@ -105,7 +105,7 @@ use yii\helpers\Url;
         echo $form->field($model, 'cur_obtendra')->widget(MultipleInput::className(), [
             'enableError' => true,
             'addButtonPosition' => MultipleInput::POS_HEADER, 
-            'sortable'  => true, // show add button in the header
+            'sortable'  => true,
             'allowEmptyList'  => true,
         ]);
     ?>
@@ -166,6 +166,9 @@ use yii\helpers\Url;
         'options' => ['rows' => 6],
         'kcfinder' => true,
     ])->label('En caso de necesitar agregar informacion extra, puede agregarlo en el siguiente espacio:') ?>
+
+
+    <?= $form->field($modelimg, 'ima_url')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cur_archivo')->widget(KCFinderInputWidget::className(), [
         'multiple' => false,
