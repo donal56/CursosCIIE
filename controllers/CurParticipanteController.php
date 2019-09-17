@@ -38,19 +38,30 @@ class CurParticipanteController extends Controller
                      //si el cupo esta lleno se inhabilita acceder a la accion create y reservar
                     [
                         'actions' =>  ['create'],
-                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['cid']])->getCupoRestante()>0),
+                        'allow' => (CurCurso::findOne(['cur_id' => 
+                            isset($_GET['cid'])? $_GET['cid'] :  
+                            CurParticipante::findOne([
+                                'par_id' => Yii::$app->request->get('id')])->par_fkcurso
+                            ])->getCupoRestante()>0),
                         'roles' => ['@'],
                     ],
                     [
                        
                         'actions' =>  ['reservar'],
-                        'allow' => (CurCurso::findOne(['cur_id' => $_GET['cid']])->getCupoRestante()>0),
+                        'allow' => (CurCurso::findOne(['cur_id' => 
+                            isset($_GET['cid'])? $_GET['cid'] :  
+                            CurParticipante::findOne([
+                                'par_id' => Yii::$app->request->get('id')])->par_fkcurso 
+                            ])->getCupoRestante()>0),
                     ],
                     // everything else is denied
                 ],
             ],
         ];
     }
+/*
+(CurCurso::findOne(['cur_id' => CurParticipante::findOne(['par_id' => Yii::$app->request->get('id')])->par_fkcurso])->getCupoRestante()>0),
+*/
 
     /**
      * Lists all CurParticipante models.
