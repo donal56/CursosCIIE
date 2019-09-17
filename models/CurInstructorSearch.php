@@ -19,7 +19,7 @@ class CurInstructorSearch extends CurInstructor
     {
         return [
             [['ins_id'], 'integer'],
-            [['ins_titulo', 'ins_nombre', 'ins_paterno', 'ins_materno', 'ins_descripcion'], 'safe'],
+            [['ins_titulo', 'ins_nombre', 'ins_paterno', 'ins_materno', 'ins_descripcion', 'ins_fullname'], 'safe'],
         ];
     }
 
@@ -63,6 +63,7 @@ class CurInstructorSearch extends CurInstructor
         ]);
 
         $query->andFilterWhere(['like', 'ins_titulo', $this->ins_titulo])
+            ->andFilterWhere(['like', 'CONCAT_WS(ins_titulo, ins_nombre, ins_paterno, ins_materno)', $this->ins_fullname])
             ->andFilterWhere(['like', 'ins_nombre', $this->ins_nombre])
             ->andFilterWhere(['like', 'ins_paterno', $this->ins_paterno])
             ->andFilterWhere(['like', 'ins_materno', $this->ins_materno])
