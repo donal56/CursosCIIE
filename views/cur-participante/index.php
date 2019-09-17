@@ -18,8 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?php
-        if (CurCurso::findOne(['cur_id' => $_GET['id']])->getCupoRestante()>0) { 
-            echo Html::a('Registrar Participante', ['create'], ['class' => 'btn btn-success']);
+        if (CurCurso::findOne(['cur_id' => $_GET['cid']])->getCupoRestante()>0) { 
+            echo Html::a('Registrar Participante', ['create', 'cid' => $_GET['cid']], ['class' => 'btn btn-success']);
         }else{
             echo Html::Button('Cupo Lleno' ,['class' => 'btn btn-danger']);
         }
@@ -31,7 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
+        'columns' => 
+        [
             ['class' => 'yii\grid\SerialColumn'],
 
             //'par_id',
@@ -59,8 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
              */
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                // 'urlCreator'    =>  function ($action, $model, $key, $index, $t) 
+                // {
+                //     return ($action == 'delete') ?: '/cur-participante/delete?id=' . $key . '&cid=' . $_GET['cid'];
+                // }
+            ]
+        ]
     ]); ?>
 <?php Pjax::end(); ?></div>
 
