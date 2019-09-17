@@ -34,17 +34,24 @@ $menuItems = [
 //   if (CurCurso::getCurso()->getCupoRestante()>0) { 
 //     $menuItems[] = ['label' => 'Reservar Lugar', 'url' => ['/cur-participante/reservar']];
 //   }
-
   $menuItems[] = ['label' => 'Iniciar Sesión', 'url' => ['/user-management/auth/login']];
 
  } else {
   
   //Agregar opciones de administrador
-    $menuItems[] = ['label' => 'Administrador', 'items'=>UserManagementModule::menuItems()];
-    $menuItems[] = ['label' => 'Administrar cursos', 'items'=>$menuAdmin];
     // $menuItems[] = ['label' => 'Ver Inscritos', 'url' => ['/cur-curso/inscritos']];
     // $menuItems[] = ['label' => 'Gestionar Participantes', 'url' => ['/cur-participante/index']];
   //endif;
+
+  if (Yii::$app->user->identity->hasRole('administrador'))
+  {
+    $menuItems[] = ['label' => 'Administrador', 'items'=>UserManagementModule::menuItems()];
+    $menuItems[] = ['label' => 'Administrar cursos', 'items'=>$menuAdmin];
+  }else
+  {
+    $menuItems[] = ['label' => 'Administrar cursos', 'items'=>$menuAdmin];
+  }
+
   $menuItems[] = [
   'label' => 'Cerrar Sesión (' . Yii::$app->user->identity->username . ')',
   'url' => ['/user-management/auth/logout'],
