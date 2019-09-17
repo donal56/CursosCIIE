@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
 
     <p>
-        <?= Html::a('', ['index', ], ['class' => 'btn btn-success glyphicon glyphicon-arrow-left']) ?>
+        <?= Html::a('', Yii::$app->request->referrer ?: Yii::$app->homeUrl, ['class' => 'btn btn-success glyphicon glyphicon-arrow-left']) ?>
         <?= Html::a('Actualizar', ['update', 'id' => $model->par_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Eliminar', ['delete', 'id' => $model->par_id], [
             'class' => 'btn btn-danger',
