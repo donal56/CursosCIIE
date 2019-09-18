@@ -72,7 +72,7 @@ class CurParticipante extends \yii\db\ActiveRecord
             'par_email' => 'Correo Electrónico',
             'par_edad' => 'Edad',
             'par_procedencia' => 'Institución de Procedencia',
-            'par_pagado' => 'Pagado',
+            'par_pagado' => 'Cantidad pagada',
             'par_observaciones' => 'Observaciones',
             'par_enteraste' => '¿Cómo te enteraste del curso?',
             'par_fkcurso' => 'Curso',
@@ -99,6 +99,11 @@ class CurParticipante extends \yii\db\ActiveRecord
     public function getNombre()
     {
         return $this->par_nombre . " " . $this->par_paterno . " " . $this->par_materno;
+    }
+
+    public function getPagado()
+    {
+        return '$' . \number_format($this->par_pagado);
     }
 
      public function getCurso()

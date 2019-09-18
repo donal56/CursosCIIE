@@ -43,8 +43,8 @@
 
 
         <div style="text-align: center;" class= 'myContainer'>
-            <?= Html::a('Ver Inscritos','/cur-curso/inscritos',['class' => 'btn btn-primary']); ?>
-            <?= Html::a('Reservar','/cur-participante/reservar',['class' => 'btn btn-success']); ?>
+                 <?= Html::a('Ver Inscritos',['cur-curso/inscritos', 'id' => $model->cur_id],['class' => 'btn btn-primary']); ?>
+                <?= Html::a('Reservar',['/cur-participante/reservar', 'cid' => $model->cur_id],['class' => 'btn btn-success']); ?>
         </div>
 
         <div class= "myContainer gray">
@@ -227,8 +227,8 @@
                 <b> Inscritos: <font size="4" style="color: #679C67;"> <?= $model->getCountInsctritos(); ?></font>,&nbsp;
                     Interesados: <font size="4" style="color: #679C67;"> <?= $model->getCupoReservados(); ?></font>,&nbsp;
                     Restantes: <font size="4" style="color: #679C67;"> <?= $model->getCupoRestante(); ?></font></b><br><br>
-                    <?= Html::a('Ver Inscritos','/cur-curso/inscritos',['class' => 'btn btn-primary']); ?>
-                    <?= Html::a('Reservar','/cur-participante/reservar',['class' => 'btn btn-success']); ?>
+                    <?= Html::a('Ver Inscritos',['cur-curso/inscritos', 'id' => $model->cur_id],['class' => 'btn btn-primary']); ?>
+                    <?= Html::a('Reservar',['/cur-participante/reservar', 'cid' => $model->cur_id],['class' => 'btn btn-success']); ?>
                 </div>
 
             <?php if($model->getContacto()) { ?>

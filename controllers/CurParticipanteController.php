@@ -120,9 +120,9 @@ class CurParticipanteController extends Controller
         }
     }
 
-    public function actionReservar()
+    public function actionReservar($cid)
     {
-        return $this->actionCreate();
+        return $this->actionCreate($cid);
     }
 
 
