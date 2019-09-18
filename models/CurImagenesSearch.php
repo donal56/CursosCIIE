@@ -39,7 +39,7 @@ class CurImagenesSearch extends CurImagenes
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($cid)
     {
         $query = CurImagenes::find();
 
@@ -60,7 +60,7 @@ class CurImagenesSearch extends CurImagenes
         // grid filtering conditions
         $query->andFilterWhere([
             'ima_id' => $this->ima_id,
-            'ima_fkcurso' => $this->ima_fkcurso,
+            'ima_fkcurso' => $cid,
         ]);
 
         $query->andFilterWhere(['like', 'ima_url', $this->ima_url]);

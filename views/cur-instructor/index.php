@@ -14,8 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cur-instructor-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($this->title) ?></h1><br>
     <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+    <!-- <?= Html::a('Registrar instructor', ['createAjax'], ['class' => 'btn btn-success']) ?><br> -->
     <br>
 
 <?php Pjax::begin(); ?> 

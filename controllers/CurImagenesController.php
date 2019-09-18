@@ -42,14 +42,20 @@ class CurImagenesController extends Controller
      * Lists all CurImagenes models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($cid)
     {
         $searchModel = new CurImagenesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search($cid);
+        $model = new CurImagenes();
+
+        $model->load(Yii::$app->request->post());
+        $model->save();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'cid' => $cid,
+            'model' => $model
         ]);
     }
 
@@ -70,15 +76,16 @@ class CurImagenesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($cid)
     {
         $model = new CurImagenes();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->ima_id]);
+            return Yii::$app->request->referrer ?: Yii::$app->homeUrl;
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'cid' => $cid
             ]);
         }
     }
@@ -112,7 +119,7 @@ class CurImagenesController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 
     /**
