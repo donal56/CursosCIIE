@@ -182,4 +182,4 @@ use yii\helpers\Url;
 </div>
 
 <?= $this->registerJsFile('/assets/ckeditor/ckeditor.js');  ?>
-<?php $this->registerJsFile("/js/modalInstructor.js", ['depends' => 'yii\web\JqueryAsset']);    ?>
+<?= $this->registerJsFile("/js/modalInstructor.js", ['depends' => 'yii\web\JqueryAsset']);    ?>

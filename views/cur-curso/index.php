@@ -64,6 +64,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model-> getInstructor();
                 }
             ],
+            [
+                'label' => 'Banners',
+                'format' => 'raw',
+                'value' => function($model) {return Html::a('Agregar <br> Banners',['cur-imagenes/index', 'cid' => $model->cur_id], ['class' => 'btn btn-success btn-xs', 'data-pjax' => 0]);}
+            ],
             // 'cur_temario',
             // 'cur_procedimiento:ntext',
             // 'cur_contacto:ntext',
@@ -76,6 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a ( '<span class="glyphicon glyphicon-user"></span> ', ['cur-participante/index', 'cid' => $model->cur_id],['data-pjax'=>"0"]);
 
                     },
+
                 ],
                 'template' => '{view} {update} {participantes} {delete}'
             ]

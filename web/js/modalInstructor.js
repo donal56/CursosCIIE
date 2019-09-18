@@ -4,7 +4,7 @@ $(document).on('click', '#abrirModal', (function()
         $(this).data('url'),
         function (data) 
         {
-            $('.modal-body').html(data);
+            $('#modal').find('.modal-body').html(data);
             $('#modal').modal();
         }
     ).done( function(data)
