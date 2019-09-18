@@ -67,7 +67,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Banners',
                 'format' => 'raw',
-                'value' => function($model) {return Html::a('Agregar <br> Banners',['cur-imagenes/index', 'cid' => $model->cur_id], ['class' => 'btn btn-success btn-xs', 'data-pjax' => 0]);}
+                'value' => function($model) {
+                    return Html::a('Agregar <br> Banners',['cur-imagenes/index', 'cid' => $model->cur_id], ['class' => 'btn btn-success btn-xs', 'data-pjax' => 0])
+                    . '<br>Banners activos: ' . sizeof($model->curImagenes);}
             ],
             // 'cur_temario',
             // 'cur_procedimiento:ntext',

@@ -78,7 +78,7 @@ class CurCursoController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->preGuardar() && $model->save()) 
         {
-            return $this->redirect(['view', 'id' => $model->cur_id]);
+            return $this->redirect(['cur-imagenes/index', 'cid' => $model->cur_id]);
         }
         else 
         {
@@ -98,9 +98,12 @@ class CurCursoController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())  && $model->preGuardar()  && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->cur_id]);
-        } else {
+        if ($model->load(Yii::$app->request->post())  && $model->preGuardar()  && $model->save()) 
+        {
+            return $this->redirect(['cur-imagenes/index', 'cid' => $model->cur_id]);
+        }
+        else 
+        {
             return $this->render('update', [
                 'model' => $model,
             ]);

@@ -57,13 +57,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'buttonLabel' =>'Subir imagen',
             'modalTitle' =>'Imágenes',
             'kcfOptions' => [
-                'uploadURL' =>'@web/uploads/img',
-                'uploadDir' => '@app/web/uploads/img',
+                'uploadURL' =>'@web/uploads/banners',
+                'uploadDir' => '@app/web/uploads/banners',
             ],
         ])->label(false);?>
 
         <?= $form->field($model, 'ima_fkcurso', ['template' => "{label}\n{input}\n{hint}"])->hiddenInput(['value'=>$cid])->label(false); ?>
         <?= Html::submitButton('Agregar', ['class' =>'btn btn-success', 'style' => 'display: inline']) ?>
+        <?= Html::a('Terminar', ['cur-curso/view', 'id' => $cid ], ['class' => 'btn btn-info']) ?>
     
         <?php ActiveForm::end(); ?>
 

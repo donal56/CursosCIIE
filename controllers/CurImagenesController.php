@@ -48,15 +48,24 @@ class CurImagenesController extends Controller
         $dataProvider = $searchModel->search($cid);
         $model = new CurImagenes();
 
-        $model->load(Yii::$app->request->post());
-        $model->save();
+        if ($model->load(Yii::$app->request->post()) &&  $model->save())
+        {
+            //Para que el modelo no se recargue en caso de refrescarse
+            $model = new CurImagenes(); 
+            $this->refresh();
+        }
+        else 
+        {
+            return $this->render('index', 
+            [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'cid' => $cid,
+                'model' => $model
+            ]);
+        }
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'cid' => $cid,
-            'model' => $model
-        ]);
+        
     }
 
     /**
