@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use iutbay\yii2kcfinder\KCFinderInputWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\CurImagenes */
@@ -12,7 +13,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'ima_url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ima_url')->widget(KCFinderInputWidget::className(), [
+        'buttonLabel' =>'Subir Imagen',
+        'modalTitle' =>'Imagenes',
+        'kcfOptions' => [
+        	 'uploadURL' =>'@web/uploads/img',
+        	 'uploadDir' => '@app/web/uploads/img',
+        ],
+    ]);?>
 
     <?= $form->field($model, 'ima_fkcurso')->textInput() ?>
 
