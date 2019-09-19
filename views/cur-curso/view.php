@@ -158,7 +158,7 @@
             <?php if($model->getFormaPago()) { ?>
                 <div class= 'myContainer'>
                     <?= Html::tag('h4', 'Formas de pago', ['class' => 'encabezado']) ?>
-                    <ul style="font-size: 1.5em" class= 'lista'>    
+                    <ul class= 'lista'>    
                     <?php 
                         foreach($model->getFormaPago() as $elem)
                         {

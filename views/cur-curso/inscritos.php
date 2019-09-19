@@ -63,7 +63,7 @@ $this->title = 'Inscritos';
                 }
                 else
                 {
-                    echo Html::a('Regresar','/',['class' => 'btn btn-primary']);
+                    echo Html::a('Regresar', Yii::$app->request->referrer ?: Yii::$app->homeUrl, ['class' => 'btn btn-primary']);
                 }
 
             ?>

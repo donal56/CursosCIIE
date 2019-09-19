@@ -289,7 +289,7 @@ class CurCurso extends \yii\db\ActiveRecord
 
     public function getURLArchivo()
     {
-        return Url::base(true) . $this->cur_archivo;
+        return $this->cur_archivo ? Url::base(true) . $this->cur_archivo : null;
     }
     
     public function getInscritos()
