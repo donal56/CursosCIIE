@@ -270,7 +270,7 @@
                             <td width='5%' valign='top'><img src='/img/iconpdf.gif'></td>
                             <td width='5%' valign='top'></td>
                             <td width='60%'><?php echo $model->getNombre(); ?></td>
-                            <td valign='top'><?php echo Html::a('Descargar', ['descargar', 'id' => $model->cur_id], ['class'=>'btn-success btn_col btn_green','type'=>'button']);?></td>
+                            <td valign='top'><?php echo Html::a('Descargar', ['descargar', 'id' => $model->cur_id], ['class'=>'btn-success btn_col btn_green','type'=>'button', 'target' => '_blank']);?></td>
                             <td width='20%' valign='top'><?= Utilidades::getDescargas($model->cur_id) ?> descargas</td>
                         </tr>
                     </table>

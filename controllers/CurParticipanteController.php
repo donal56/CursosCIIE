@@ -71,7 +71,7 @@ class CurParticipanteController extends Controller
     {
 
         $searchModel = new CurParticipanteSearch();
-        $dataProvider = $searchModel->search($id);
+        $dataProvider = $searchModel->search($cid);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

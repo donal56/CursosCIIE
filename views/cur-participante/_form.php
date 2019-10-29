@@ -48,7 +48,7 @@ use app\models\CurCurso;
     <?php echo (!Yii::$app->user->isGuest ? $form->field($model, 'par_observaciones',['options' => ['class' => 'form-group col-sm-12']])->textarea(['rows' => 2]) : '') ?>  
 </div>
 
-    <?= $form->field($model, 'par_fkcurso')->hiddenInput(['value'=>$cid])->label(false); ?>
+    <?= $form->field($model, 'par_fkcurso')->hiddenInput(['value'=>(isset($cid) ? $cid : $model->par_fkcurso)])->label(false); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Registrar' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
